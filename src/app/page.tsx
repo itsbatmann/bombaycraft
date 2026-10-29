@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CtaBanner } from "@/components/CtaBanner";
+import { VideoBlock } from "@/components/VideoBlock";
 import { Intro } from "@/components/home/Intro";
 import { Marquee } from "@/components/home/Marquee";
 import { projects, services } from "@/lib/site";
@@ -15,6 +16,31 @@ export default function Home() {
   return (
     <>
       <Intro />
+
+      {/* Statement */}
+      <section className="bg-ink text-paper">
+        <div className="container-x py-24 md:py-40">
+          <p data-reveal className="eyebrow text-glow">Digital studio · Made in Bombay</p>
+          <h1
+            data-reveal
+            className="mt-6 max-w-6xl font-display text-5xl leading-[1.02] font-semibold tracking-tight md:text-8xl"
+          >
+            We build websites, CRMs, CMS &amp; media that <em className="font-normal text-glow">moves</em>.
+          </h1>
+          <div data-reveal className="mt-12 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <p className="max-w-xl text-lg text-paper/70 md:text-xl">
+              Creative websites, MERN stack web apps, custom CRMs and CMS platforms, plus the
+              films and media that bring your brand to life.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex shrink-0 items-center rounded-full border border-paper/40 px-7 py-3.5 font-medium hover:border-glow hover:bg-glow hover:text-ink"
+            >
+              Start a project
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <Marquee items={services.map((s) => s.short)} />
 
@@ -53,16 +79,30 @@ export default function Home() {
 
       {/* Selected work */}
       <section aria-labelledby="work-heading" className="container-x pb-20 md:pb-28">
-        <div data-reveal>
-          <p className="eyebrow">Selected work</p>
-          <h2 id="work-heading" className="mt-3 font-display text-4xl font-semibold md:text-6xl">
-            Recent projects
-          </h2>
+        <div data-reveal className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow">Selected work</p>
+            <h2 id="work-heading" className="mt-3 font-display text-4xl font-semibold md:text-6xl">
+              Recent projects
+            </h2>
+          </div>
+          <Link href="/work" className="font-medium underline underline-offset-4 hover:text-accent">
+            All work
+          </Link>
         </div>
         <ul className="mt-12 grid gap-8 md:grid-cols-2">
           {projects.slice(0, 2).map((p) => (
             <li key={p.title} data-reveal>
-              <div className="aspect-[4/3] rounded-3xl bg-line" aria-hidden="true" />
+              <VideoBlock
+                src={p.video}
+                poster={p.poster}
+                label={`${p.title} preview`}
+                className="aspect-[4/3] w-full overflow-hidden rounded-3xl bg-ink"
+              >
+                <div className="grid h-full place-items-center text-xs tracking-[0.3em] text-paper/50 uppercase">
+                  Film coming soon
+                </div>
+              </VideoBlock>
               <h3 className="mt-4 text-xl font-semibold">{p.title}</h3>
               <p className="text-muted">
                 {p.category} · {p.year}

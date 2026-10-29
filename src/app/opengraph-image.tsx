@@ -1,13 +1,22 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { site } from "@/lib/site";
 
-// Social share preview (WhatsApp, LinkedIn, X, etc). Replace with the
-// real logo once it's ready.
+// Social share preview (WhatsApp, LinkedIn, X, etc).
 export const alt = `${site.name} | ${site.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+async function logoDataUrl() {
+  "use cache";
+  const logo = await readFile(join(process.cwd(), "public/brand/logo.png"));
+  return `data:image/png;base64,${logo.toString("base64")}`;
+}
+
+export default async function Image() {
+  const logoSrc = await logoDataUrl();
+
   return new ImageResponse(
     (
       <div
@@ -22,9 +31,8 @@ export default function Image() {
           color: "#17130f",
         }}
       >
-        <div style={{ display: "flex", fontSize: 56, fontWeight: 700 }}>
-          bombay<span style={{ color: "#e0522b" }}>craft</span>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logoSrc} alt="" width={300} height={136} />
         <div style={{ display: "flex", fontSize: 84, fontWeight: 700, lineHeight: 1.05, maxWidth: 950 }}>
           We build websites, CRMs &amp; media.
         </div>

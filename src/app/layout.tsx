@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
-import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -60,7 +59,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f6f1e9",
+  themeColor: "#17130f",
 };
 
 const organizationJsonLd = {
@@ -69,6 +68,8 @@ const organizationJsonLd = {
   "@id": `${site.url}/#organization`,
   name: site.name,
   url: site.url,
+  logo: `${site.url}/brand/logo.png`,
+  image: `${site.url}/brand/logo.png`,
   description: site.description,
   email: site.email,
   telephone: site.phone,
@@ -108,7 +109,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
-        <Header />
         <main id="main" className="flex-1">
           {children}
         </main>

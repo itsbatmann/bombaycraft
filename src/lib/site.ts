@@ -75,9 +75,24 @@ export const services = [
   },
 ] as const;
 
-export const projects = [
-  { title: "Project One", category: "Creative Website", year: "2026" },
-  { title: "Project Two", category: "Custom CRM", year: "2026" },
-  { title: "Project Three", category: "Brand Film", year: "2025" },
-  { title: "Project Four", category: "MERN Web App", year: "2025" },
-] as const;
+// Videos: host large files on a CDN (Cloudinary, Mux, Vercel Blob, Bunny)
+// rather than in git, then paste the URL here. Leave null for "Coming soon".
+export const showreel: { src: string | null; poster: string | null } = {
+  src: null, // e.g. "https://cdn.example.com/bombaycraft-showreel.mp4"
+  poster: null, // e.g. "/showreel-poster.jpg"
+};
+
+type Project = {
+  title: string;
+  category: string;
+  year: string;
+  video: string | null;
+  poster: string | null;
+};
+
+export const projects: Project[] = [
+  { title: "Project One", category: "Creative Website", year: "2026", video: null, poster: null },
+  { title: "Project Two", category: "Custom CRM", year: "2026", video: null, poster: null },
+  { title: "Project Three", category: "Brand Film", year: "2025", video: null, poster: null },
+  { title: "Project Four", category: "MERN Web App", year: "2025", video: null, poster: null },
+];
