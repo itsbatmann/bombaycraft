@@ -1,69 +1,99 @@
-import Image from "next/image";
+import Link from "next/link";
+import { CtaBanner } from "@/components/CtaBanner";
+import { Intro } from "@/components/home/Intro";
+import { Marquee } from "@/components/home/Marquee";
+import { projects, services } from "@/lib/site";
+
+const process = [
+  { step: "01", title: "Discover", text: "We learn your business, your users and what success looks like." },
+  { step: "02", title: "Design", text: "We map the experience and design every screen, frame and flow." },
+  { step: "03", title: "Build", text: "We develop, shoot and edit with regular check-ins along the way." },
+  { step: "04", title: "Launch", text: "We go live, measure what works and keep improving with you." },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Intro />
+
+      <Marquee items={services.map((s) => s.short)} />
+
+      {/* Services */}
+      <section aria-labelledby="services-heading" className="container-x py-20 md:py-28">
+        <div data-reveal className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow">What we do</p>
+            <h2 id="services-heading" className="mt-3 font-display text-4xl font-semibold md:text-6xl">
+              Built in Bombay,
+              <br />
+              made for everywhere.
+            </h2>
+          </div>
+          <Link href="/services" className="font-medium underline underline-offset-4 hover:text-accent">
+            All services
+          </Link>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <ul data-reveal className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s, i) => (
+            <li key={s.slug} className="bg-paper p-8 md:p-10">
+              <span className="font-display text-accent">0{i + 1}</span>
+              <h3 className="mt-6 font-display text-2xl font-semibold">{s.title}</h3>
+              <p className="mt-3 text-muted">{s.summary}</p>
+            </li>
+          ))}
+          <li className="bg-ink p-8 text-paper md:p-10">
+            <h3 className="font-display text-2xl font-semibold">Something else in mind?</h3>
+            <p className="mt-3 text-paper/70">If it lives on a screen, we can probably build it.</p>
+            <Link href="/contact" className="mt-6 inline-flex font-medium text-glow underline underline-offset-4">
+              Let&apos;s talk
+            </Link>
+          </li>
+        </ul>
+      </section>
+
+      {/* Selected work */}
+      <section aria-labelledby="work-heading" className="container-x pb-20 md:pb-28">
+        <div data-reveal>
+          <p className="eyebrow">Selected work</p>
+          <h2 id="work-heading" className="mt-3 font-display text-4xl font-semibold md:text-6xl">
+            Recent projects
+          </h2>
         </div>
-      </main>
-    </div>
+        <ul className="mt-12 grid gap-8 md:grid-cols-2">
+          {projects.slice(0, 2).map((p) => (
+            <li key={p.title} data-reveal>
+              <div className="aspect-[4/3] rounded-3xl bg-line" aria-hidden="true" />
+              <h3 className="mt-4 text-xl font-semibold">{p.title}</h3>
+              <p className="text-muted">
+                {p.category} · {p.year}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Process */}
+      <section aria-labelledby="process-heading" className="bg-ink text-paper">
+        <div className="container-x py-20 md:py-28">
+          <div data-reveal>
+            <p className="eyebrow">How we work</p>
+            <h2 id="process-heading" className="mt-3 font-display text-4xl font-semibold md:text-6xl">
+              From brief to launch
+            </h2>
+          </div>
+          <ol className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {process.map((p) => (
+              <li key={p.step} data-reveal className="border-t border-paper/20 pt-6">
+                <span className="font-display text-glow">{p.step}</span>
+                <h3 className="mt-2 text-xl font-semibold">{p.title}</h3>
+                <p className="mt-2 text-paper/70">{p.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <CtaBanner />
+    </>
   );
 }
