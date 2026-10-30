@@ -1,77 +1,223 @@
 @import "tailwindcss";
 
-/* Brand tokens: change colours here and the whole site follows. */
-@theme {
-  --color-paper: #f6f1e9;
-  --color-ink: #17130f;
-  --color-muted: #6b645b;
-  --color-line: #e2d8c8;
-  --color-accent: #b04024; /* logo terracotta */
-  --color-accent-ink: #ffffff;
-  --color-glow: #ffc247; /* Marine Drive streetlight / kaali-peeli taxi yellow */
-  --color-sea: #1d3a7a; /* Arabian Sea blue */
+/*
+  Bombay Deco.
+  Night in Bombay: black-green, ivory and brass gold.
+  Day in Bombay: ivory, deep emerald ink and gold.
+  The site follows the time in Bombay; visitors can switch.
+*/
+:root,
+[data-theme="night"] {
+  --bg: #0b0f0d;
+  --bg-2: #131b18;
+  --fg: #f2ebdd;
+  --dim: rgb(242 235 221 / 0.66);
+  --gold: #c9a45c;
+  --rule: rgb(201 164 92 / 0.38);
+  --ticket: #c9a45c;
+  --ticket-ink: #0b0f0d;
+}
+[data-theme="day"] {
+  --bg: #f2ebdd;
+  --bg-2: #e7dcc5;
+  --fg: #12201b;
+  --dim: rgb(18 32 27 / 0.7);
+  --gold: #8a6526;
+  --rule: rgb(138 101 38 / 0.42);
+  --ticket: #0f3d33;
+  --ticket-ink: #f2ebdd;
 }
 
 @theme inline {
-  --font-sans: var(--font-body);
-  --font-display: var(--font-heading);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-fg: var(--fg);
+  --color-dim: var(--dim);
+  --color-gold: var(--gold);
+  --color-rule: var(--rule);
+  --color-ticket: var(--ticket);
+  --color-ticket-ink: var(--ticket-ink);
+  --color-ivory: #f2ebdd;
+  --color-night: #0b0f0d;
+  --color-emerald: #0f3d33;
+  --color-terracotta: #b04024;
+  --font-serif: var(--font-bodoni);
+  --font-script: var(--font-pinyon);
+  --font-sans: var(--font-montserrat);
+  --font-marathi: var(--font-devanagari);
+}
+
+:root {
+  --margin: clamp(1.25rem, 3vw, 3rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
-  scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
-  background: var(--color-paper);
-  color: var(--color-ink);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+  line-height: 1.7;
+  transition:
+    background-color 0.7s ease,
+    color 0.7s ease;
 }
 
 ::selection {
-  background: var(--color-accent);
-  color: var(--color-accent-ink);
+  background: var(--gold);
+  color: var(--bg);
 }
 
-@utility container-x {
-  margin-inline: auto;
-  width: 100%;
-  max-width: 80rem;
-  padding-inline: 1.25rem;
-  @media (width >= 48rem) {
-    padding-inline: 2rem;
-  }
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 4px;
 }
 
-@utility eyebrow {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+@utility frame {
+  padding-inline: var(--margin);
+}
+
+/* Small capitals in Montserrat: labels, details, buttons */
+@utility caps {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  line-height: 1.6;
   text-transform: uppercase;
-  color: var(--color-accent);
 }
 
-@utility btn-primary {
+/* Bodoni at poster size */
+@utility display {
+  font-family: var(--font-serif);
+  font-size: clamp(4rem, 13vw, 13.5rem);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.035em;
+  font-variation-settings: "opsz" 96;
+}
+
+/* Bodoni section titles */
+@utility heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 7vw, 7rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 96;
+}
+
+/* Bodoni italic for statements */
+@utility lede {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 48;
+}
+
+/* Pinyon Script flourish */
+@utility script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+  color: var(--gold);
+}
+
+/* Deco rule: a fine gold line */
+@utility rule {
+  border-color: var(--rule);
+}
+
+/* The one button: a gold-edged pill that fills on hover */
+@utility pill {
   display: inline-flex;
   align-items: center;
-  border-radius: 9999px;
-  background: var(--color-ink);
-  color: var(--color-paper);
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  gap: 0.75em;
+  min-height: 3rem;
+  padding: 0 1.6rem;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out);
   &:hover {
-    background: var(--color-accent);
+    background: var(--gold);
+    color: var(--bg);
   }
 }
 
-/* Film grain for the showreel placeholder */
-.grain {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+@utility link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.3s var(--ease-out), color 0.3s;
+  &:hover {
+    text-decoration-color: var(--gold);
+    color: var(--gold);
+  }
+}
+
+/* The logo comes in two inks; show the one that suits the theme */
+[data-theme="night"] .logo-day,
+[data-theme="day"] .logo-night {
+  display: none;
+}
+
+/* Room for descenders inside SplitText's character masks */
+.hero-word > * {
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+}
+
+/* The crafts band */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Cinema marquee bulbs */
+@keyframes bulb {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Lenis smooth scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 /* Failsafe: if JS never runs, the preloader still gets out of the way. */
 .preloader {
-  animation: preloader-failsafe 0.4s ease 8s forwards;
+  animation: preloader-failsafe 0.4s ease 9s forwards;
 }
 @keyframes preloader-failsafe {
   to {
@@ -83,8 +229,7 @@ body {
   .preloader {
     display: none;
   }
-}
-
-details > summary::-webkit-details-marker {
-  display: none;
+  * {
+    animation-duration: 0.01ms !important;
+  }
 }

@@ -1,20 +1,41 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Bodoni_Moda, Montserrat, Pinyon_Script, Tiro_Devanagari_Marathi } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const heading = Fraunces({
-  variable: "--font-heading",
+// Bodoni for display and statements, Pinyon Script for flourishes,
+// Montserrat for small capitals and running text.
+const bodoni = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
   display: "swap",
 });
 
-const body = Inter({
-  variable: "--font-body",
+const pinyon = Pinyon_Script({
+  variable: "--font-pinyon",
   subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+// Only used for the Marathi phrase in the preloader.
+const devanagari = Tiro_Devanagari_Marathi({
+  variable: "--font-devanagari",
+  subsets: ["devanagari"],
+  weight: "400",
   display: "swap",
 });
 
@@ -59,8 +80,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#17130f",
+  themeColor: "#0b0f0d",
 };
+
+// Picks Day or Night before the first paint: a saved choice if there is
+// one, otherwise the hour in Bombay (7 am to 7 pm is day).
+const themeScript = `(function(){try{var t=localStorage.getItem("bc-theme");if(t!=="day"&&t!=="night"){var h=+new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kolkata",hour:"2-digit",hour12:false}).format(new Date());t=h>=7&&h<19?"day":"night"}document.documentElement.dataset.theme=t}catch(e){}})();`;
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -98,12 +123,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-IN"
-      className={`${heading.variable} ${body.variable} h-full antialiased`}
+      data-theme="night"
+      suppressHydrationWarning
+      className={`${bodoni.variable} ${pinyon.variable} ${montserrat.variable} ${devanagari.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-night"
         >
           Skip to content
         </a>
@@ -113,6 +143,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <SmoothScroll />
         <ScrollReveal />
       </body>
     </html>

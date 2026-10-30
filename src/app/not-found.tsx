@@ -9,15 +9,22 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="container-x py-24 text-center">
-      <div className="mb-16 flex justify-center">
-        <Logo className="h-16 w-auto" />
+    <section className="frame flex min-h-svh flex-col justify-between bg-bg py-[var(--margin)]">
+      <div className="caps flex items-start justify-between gap-6">
+        <Logo className="h-12 w-auto md:h-16" />
+        <p className="text-dim">404</p>
       </div>
-      <p className="eyebrow">404</p>
-      <h1 className="mt-4 font-display text-5xl font-semibold">This page wandered off.</h1>
-      <Link href="/" className="btn-primary mt-8">
-        Back to home
-      </Link>
+      <div className="pb-[10svh] text-center">
+        <h1 className="heading">
+          Wrong platform
+          <span className="script mt-3 block text-[0.9em]">this train has left</span>
+        </h1>
+        <p className="lede mx-auto mt-10 max-w-[26ch]">The page you wanted is not here. The home page is one stop away.</p>
+        <Link href="/" className="pill mt-12">
+          Back to home
+        </Link>
+      </div>
+      <p className="caps text-center text-dim">Bombay</p>
     </section>
   );
 }

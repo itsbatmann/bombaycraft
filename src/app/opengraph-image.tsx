@@ -27,8 +27,8 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "#f6f1e9",
-          color: "#17130f",
+          background: "#f3f2ef",
+          color: "#131313",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -36,7 +36,7 @@ export default async function Image() {
         <div style={{ display: "flex", fontSize: 84, fontWeight: 700, lineHeight: 1.05, maxWidth: 950 }}>
           We build websites, CRMs &amp; media.
         </div>
-        <div style={{ display: "flex", fontSize: 30, color: "#6b645b" }}>{site.tagline}</div>
+        <div style={{ display: "flex", fontSize: 30, color: "#6f6e6a" }}>{site.tagline}</div>
       </div>
     ),
     size,

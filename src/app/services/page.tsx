@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import { CtaBanner } from "@/components/CtaBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { PageHero } from "@/components/PageHero";
+import { ServiceDetails } from "@/components/sections/ServiceDetails";
 import { pageMetadata } from "@/lib/seo";
 import { services, site } from "@/lib/site";
 
 const description =
-  "Creative websites, MERN stack development, custom CRMs, CMS solutions and media & video production from Bombaycraft, a digital studio in Mumbai.";
+  "Creative websites, MERN stack web apps, custom CRMs, CMS platforms and films from Bombaycraft, a digital studio in Bombay.";
 
-export const metadata: Metadata = pageMetadata({
-  title: "Services",
-  description,
-  path: "/services",
-});
+export const metadata: Metadata = pageMetadata({ title: "Services", description, path: "/services" });
 
 const servicesJsonLd = {
   "@context": "https://schema.org",
@@ -35,22 +31,12 @@ export default function ServicesPage() {
     <>
       <JsonLd data={servicesJsonLd} />
       <PageHero
-        eyebrow="Services"
-        title="Everything your brand needs to run and stand out online."
-        intro="From the website people see to the CRM your team runs on, and the films that tell your story."
+        label="I — Services"
+        title="Five crafts"
+        flourish="one atelier"
+        intro="The website people see, the software your team runs on, and the films that tell your story."
       />
-      <section className="container-x pb-10">
-        <ul className="divide-y divide-line border-y border-line">
-          {services.map((s, i) => (
-            <li key={s.slug} id={s.slug} data-reveal className="grid gap-4 py-10 md:grid-cols-[6rem_1fr_1.5fr]">
-              <span className="font-display text-accent">0{i + 1}</span>
-              <h2 className="font-display text-3xl font-semibold">{s.title}</h2>
-              <p className="text-lg text-muted">{s.summary}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-      <CtaBanner />
+      <ServiceDetails />
     </>
   );
 }

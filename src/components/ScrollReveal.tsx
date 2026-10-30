@@ -7,8 +7,9 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-// Fades up any element marked with `data-reveal` as it scrolls into view.
-// Re-runs on route change so every page gets it.
+// Parts marked `data-reveal` rise in turn as their section enters.
+// Elements marked `data-speed` drift with the scroll (below 1 is slower).
+// Content is visible without JS.
 export function ScrollReveal() {
   const pathname = usePathname();
 
@@ -16,15 +17,33 @@ export function ScrollReveal() {
     () => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-      gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
-        gsap.from(el, {
-          y: 48,
+      gsap.utils.toArray<HTMLElement>("section, footer").forEach((section) => {
+        const parts = section.querySelectorAll<HTMLElement>("[data-reveal]");
+        if (!parts.length) return;
+        gsap.from(parts, {
+          y: 40,
           opacity: 0,
-          duration: 1,
+          duration: 1.2,
           ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          stagger: 0.1,
+          scrollTrigger: { trigger: section, start: "top 75%", once: true },
         });
       });
+
+      gsap.utils.toArray<HTMLElement>("[data-speed]").forEach((el) => {
+        const speed = Number(el.dataset.speed) || 1;
+        gsap.fromTo(
+          el,
+          { y: (1 - speed) * -160 },
+          {
+            y: (1 - speed) * 160,
+            ease: "none",
+            scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true },
+          },
+        );
+      });
+
+      ScrollTrigger.refresh();
     },
     { dependencies: [pathname], revertOnUpdate: true },
   );
