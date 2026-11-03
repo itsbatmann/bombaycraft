@@ -14,12 +14,12 @@ export default function CreditsPage() {
     <>
       <PageHero
         label="Credits"
-        title="With thanks"
-        flourish="to Bombay's filmmakers"
-        intro="The film of Bombay behind our showreel comes from Wikimedia Commons, shared by its maker."
+        title="Thanks"
+        flourish="to the makers"
+        intro="The film behind our hero comes from Wikimedia Commons, shared by its maker."
       />
       <section aria-labelledby="credits-heading" className="frame bg-bg-2 py-28">
-        <h2 id="credits-heading" className="caps rule border-b pb-4">
+        <h2 data-reveal id="credits-heading" className="caps rule border-b pb-4">
           Footage
         </h2>
         <ul className="mt-14 grid gap-12 md:grid-cols-2">

@@ -1,31 +1,19 @@
 @import "tailwindcss";
 
 /*
-  Bombay Deco.
-  Night in Bombay: black-green, ivory and brass gold.
-  Day in Bombay: ivory, deep emerald ink and gold.
-  The site follows the time in Bombay; visitors can switch.
+  Bombay Deco, in four colours:
+    #F5F5F5 off-white, #F2EAD3 cream, #DFD7BF sand, #3F2305 deep brown.
+  Cream and sand grounds with brown ink; brown blocks with cream on them.
 */
-:root,
-[data-theme="night"] {
-  --bg: #0b0f0d;
-  --bg-2: #131b18;
-  --fg: #f2ebdd;
-  --dim: rgb(242 235 221 / 0.66);
-  --gold: #c9a45c;
-  --rule: rgb(201 164 92 / 0.38);
-  --ticket: #c9a45c;
-  --ticket-ink: #0b0f0d;
-}
-[data-theme="day"] {
-  --bg: #f2ebdd;
-  --bg-2: #e7dcc5;
-  --fg: #12201b;
-  --dim: rgb(18 32 27 / 0.7);
-  --gold: #8a6526;
-  --rule: rgb(138 101 38 / 0.42);
-  --ticket: #0f3d33;
-  --ticket-ink: #f2ebdd;
+:root {
+  --bg: #f2ead3;
+  --bg-2: #dfd7bf;
+  --fg: #3f2305;
+  --dim: rgb(63 35 5 / 0.72);
+  --gold: #3f2305;
+  --rule: rgb(63 35 5 / 0.25);
+  --ticket: #3f2305;
+  --ticket-ink: #f5f5f5;
 }
 
 @theme inline {
@@ -37,9 +25,10 @@
   --color-rule: var(--rule);
   --color-ticket: var(--ticket);
   --color-ticket-ink: var(--ticket-ink);
-  --color-ivory: #f2ebdd;
-  --color-night: #0b0f0d;
-  --color-emerald: #0f3d33;
+  --color-ivory: #f5f5f5;
+  --color-cream: #f2ead3;
+  --color-sand: #dfd7bf;
+  --color-night: #3f2305;
   --color-terracotta: #b04024;
   --font-serif: var(--font-bodoni);
   --font-script: var(--font-pinyon);
@@ -74,7 +63,7 @@ body {
 }
 
 :focus-visible {
-  outline: 1px solid var(--gold);
+  outline: 2px solid var(--gold);
   outline-offset: 4px;
 }
 
@@ -85,7 +74,7 @@ body {
 /* Small capitals in Montserrat: labels, details, buttons */
 @utility caps {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.22em;
   line-height: 1.6;
@@ -148,7 +137,7 @@ body {
   border: 1px solid var(--gold);
   border-radius: 999px;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -168,38 +157,7 @@ body {
   text-decoration-color: transparent;
   transition: text-decoration-color 0.3s var(--ease-out), color 0.3s;
   &:hover {
-    text-decoration-color: var(--gold);
-    color: var(--gold);
-  }
-}
-
-/* The logo comes in two inks; show the one that suits the theme */
-[data-theme="night"] .logo-day,
-[data-theme="day"] .logo-night {
-  display: none;
-}
-
-/* Room for descenders inside SplitText's character masks */
-.hero-word > * {
-  padding-bottom: 0.16em;
-  margin-bottom: -0.16em;
-}
-
-/* The crafts band */
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* Cinema marquee bulbs */
-@keyframes bulb {
-  0%,
-  100% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 1;
+    text-decoration-color: currentColor;
   }
 }
 
@@ -215,20 +173,7 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* Failsafe: if JS never runs, the preloader still gets out of the way. */
-.preloader {
-  animation: preloader-failsafe 0.4s ease 9s forwards;
-}
-@keyframes preloader-failsafe {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
-  .preloader {
-    display: none;
-  }
   * {
     animation-duration: 0.01ms !important;
   }

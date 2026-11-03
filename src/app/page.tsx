@@ -1,21 +1,19 @@
-import { Opening } from "@/components/Opening";
-import { Glossary } from "@/components/sections/Glossary";
-import { Manifesto } from "@/components/sections/Manifesto";
-import { Marquee } from "@/components/sections/Marquee";
-import { NowShowing } from "@/components/sections/NowShowing";
-import { Scenes } from "@/components/sections/Scenes";
-import { Ticket } from "@/components/sections/Ticket";
+import { Hero } from "@/components/Hero";
+import { Atelier } from "@/components/sections/Atelier";
+import { Numbers } from "@/components/sections/Numbers";
+import { Stranger } from "@/components/sections/Stranger";
+import { WhatWeDo } from "@/components/sections/WhatWeDo";
+import { WorkBento } from "@/components/sections/WorkBento";
 
 export default function Home() {
   return (
     <>
-      <Opening />
-      <Manifesto />
-      <NowShowing />
-      <Marquee />
-      <Scenes />
-      <Glossary />
-      <Ticket label="V — Admit one" />
+      <Hero nextId="work" />
+      <WorkBento />
+      <WhatWeDo />
+      <Numbers />
+      <Atelier />
+      <Stranger />
     </>
   );
 }

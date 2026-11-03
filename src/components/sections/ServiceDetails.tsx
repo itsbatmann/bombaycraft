@@ -21,15 +21,15 @@ export function ServiceDetails() {
               <p className="script mt-4 text-4xl">{s.tagline}</p>
             </div>
           </div>
-          <div className="rule border-t pt-8 lg:col-span-6 lg:col-start-7">
-            <p data-reveal className="lede">
+          <div className="lg:col-span-6 lg:col-start-7">
+            <p data-reveal className="max-w-[46ch] text-xl leading-snug text-dim">
               {s.summary}
             </p>
             <h4 className="caps mt-12 text-dim">What you get</h4>
-            <ul className="mt-6">
+            <ul className="mt-6 space-y-4">
               {s.deliverables.map((item) => (
-                <li key={item} data-reveal className="rule flex items-baseline gap-4 border-b py-4 font-serif text-2xl">
-                  <span className="text-sm text-gold">✦</span>
+                <li key={item} data-reveal className="flex items-baseline gap-4 font-serif text-2xl">
+                  <span className="mt-[0.9em] block size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
                   {item}
                 </li>
               ))}

@@ -2,30 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
-// Brand mark. "auto" follows the theme (terracotta by day, ivory by night);
-// "light" is for use over photographs and video.
+// Brand mark: terracotta on the cream page, cream over video and brown blocks.
 export function Logo({
-  tone = "auto",
+  tone = "dark",
   className = "h-12 w-auto",
   priority = false,
 }: {
-  tone?: "auto" | "light";
+  tone?: "dark" | "light";
   className?: string;
   priority?: boolean;
 }) {
-  const mark = (src: string, extra = "") => (
-    <Image src={src} alt={site.name} width={1000} height={453} priority={priority} className={`${className} ${extra}`} />
-  );
   return (
     <Link href="/" aria-label={`${site.name} home`} className="inline-block">
-      {tone === "light" ? (
-        mark("/brand/logo-light.png")
-      ) : (
-        <>
-          {mark("/brand/logo.png", "logo-day")}
-          {mark("/brand/logo-light.png", "logo-night")}
-        </>
-      )}
+      <Image
+        src={tone === "light" ? "/brand/logo-light.png" : "/brand/logo.png"}
+        alt={site.name}
+        width={1000}
+        height={453}
+        priority={priority}
+        className={className}
+      />
     </Link>
   );
 }

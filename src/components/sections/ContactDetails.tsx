@@ -13,7 +13,7 @@ const ROMAN = ["i", "ii", "iii", "iv"];
 export function ContactDetails() {
   return (
     <section aria-labelledby="write-heading" className="frame bg-bg pb-28 md:pb-44">
-      <div className="caps rule flex justify-between gap-6 border-b pb-4">
+      <div data-reveal className="caps rule flex justify-between gap-6 border-b pb-4">
         <span>II — Write to us</span>
         <span className="text-dim">We reply within a working day</span>
       </div>
@@ -24,6 +24,7 @@ export function ContactDetails() {
             Email
           </h2>
           <a
+            data-reveal
             href={mailto("A new project with Bombaycraft")}
             className="mt-4 block font-serif text-[clamp(1.9rem,3.4vw,3.4rem)] leading-tight italic transition-colors hover:text-gold"
           >
@@ -32,7 +33,7 @@ export function ContactDetails() {
             <wbr />@{site.email.split("@")[1]}
           </a>
 
-          <dl className="mt-16 grid gap-10 sm:grid-cols-2">
+          <dl data-reveal className="mt-16 grid gap-10 sm:grid-cols-2">
             <div>
               <dt className="caps text-dim">Phone</dt>
               <dd className="mt-2 font-serif text-2xl">
@@ -60,9 +61,9 @@ export function ContactDetails() {
           </dl>
         </div>
 
-        <div className="bg-bg-2 p-8 md:p-12 lg:col-span-5 lg:col-start-8">
+        <div data-reveal className="bg-bg-2 p-8 md:p-12 lg:col-span-5 lg:col-start-8">
           <h3 className="font-serif text-4xl italic">A good brief</h3>
-          <p className="mt-3 text-sm text-dim">A few lines are enough. These help most:</p>
+          <p className="mt-3 text-dim">A few lines are enough. These help most:</p>
           <ol className="mt-10 space-y-6">
             {brief.map((line, i) => (
               <li key={line} data-reveal className="flex gap-5">

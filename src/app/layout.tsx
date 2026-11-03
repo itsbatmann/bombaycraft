@@ -80,12 +80,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0f0d",
+  themeColor: "#3f2305",
 };
-
-// Picks Day or Night before the first paint: a saved choice if there is
-// one, otherwise the hour in Bombay (7 am to 7 pm is day).
-const themeScript = `(function(){try{var t=localStorage.getItem("bc-theme");if(t!=="day"&&t!=="night"){var h=+new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Kolkata",hour:"2-digit",hour12:false}).format(new Date());t=h>=7&&h<19?"day":"night"}document.documentElement.dataset.theme=t}catch(e){}})();`;
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -123,13 +119,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-IN"
-      data-theme="night"
-      suppressHydrationWarning
       className={`${bodoni.variable} ${pinyon.variable} ${montserrat.variable} ${devanagari.variable} h-full antialiased`}
     >
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"

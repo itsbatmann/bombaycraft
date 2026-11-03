@@ -27,16 +27,16 @@ export default async function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "#f3f2ef",
-          color: "#131313",
+          background: "#f2ead3",
+          color: "#3f2305",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoSrc} alt="" width={300} height={136} />
         <div style={{ display: "flex", fontSize: 84, fontWeight: 700, lineHeight: 1.05, maxWidth: 950 }}>
-          We build websites, CRMs &amp; media.
+          Websites, apps and films, made in Bombay.
         </div>
-        <div style={{ display: "flex", fontSize: 30, color: "#6f6e6a" }}>{site.tagline}</div>
+        <div style={{ display: "flex", fontSize: 30, color: "#8a6a3e" }}>{site.tagline}</div>
       </div>
     ),
     size,

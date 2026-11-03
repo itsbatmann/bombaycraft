@@ -114,16 +114,23 @@ export const founders = [
 // Videos: host large files on a CDN (Cloudinary, Mux, Vercel Blob, Bunny)
 // rather than in git, then paste the URL here.
 export const showreel: { src: string | null; poster: string | null } = {
-  src: null, // e.g. "https://cdn.example.com/bombaycraft-showreel.mp4"
+  src: null, // e.g. "https://cdn.example.com/bombaycraft-founders.mp4"
   poster: null,
 };
 
-// Plays behind the hero until the showreel is ready.
+// Plays in the hero until the founders' film is ready: Marine Drive at
+// dusk, 30 seconds, from Wikimedia Commons (credited on /credits).
 export const ambientClip = {
-  src: "/media/the-changing-colours-of-mumbai-cst-railway.webm",
-  poster: "/media/the-changing-colours-of-mumbai-cst-railway-poster.jpg",
-  caption: "Now playing: CST station at night. Our showreel lands soon.",
+  mp4: "/media/marine-drive.mp4",
+  webm: "/media/marine-drive.webm",
+  poster: "/media/marine-drive.jpg",
 };
+
+// TEMPORARY numbers: replace with the real ones before launch.
+export const numbers = [
+  { figure: "24", caption: "projects shipped since 2023" },
+  { figure: "5", caption: "crafts under one roof" },
+];
 
 // SAMPLE projects so the layout can be seen at full density.
 // Replace with real work before launch.
