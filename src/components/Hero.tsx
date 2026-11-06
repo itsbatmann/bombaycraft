@@ -1,101 +1,67 @@
-"use client";
+import Link from "next/link";
+import { Nav } from "./Nav";
+import { services } from "@/lib/site";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ambientClip, showreel, site } from "@/lib/site";
-import { scrollToElement } from "@/lib/scroll";
-
-gsap.registerPlugin(useGSAP);
-
-// The film fills the first screen edge to edge. It plays once; when it
-// ends the page glides down to the work by itself.
-export function Hero({ nextId }: { nextId: string }) {
-  const root = useRef<HTMLElement>(null);
-  const video = useRef<HTMLVideoElement>(null);
-  const bar = useRef<HTMLSpanElement>(null);
-  const [blocked, setBlocked] = useState(false);
-
-  useGSAP(
-    () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      // The one loud moment: the film opens from the top edge and settles.
-      gsap
-        .timeline()
-        .fromTo(".hero-film", { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0 0 0% 0)", duration: 1.2, ease: "expo.inOut" })
-        .fromTo(".hero-film video", { scale: 1.12 }, { scale: 1, duration: 1.6, ease: "expo.out" }, 0.2)
-        .from(".hero-corner", { opacity: 0, y: 10, duration: 0.8, ease: "power3.out", stagger: 0.1 }, 0.9);
-    },
-    { scope: root },
-  );
-
-  useEffect(() => {
-    const v = video.current;
-    if (!v) return;
-    // Browsers only allow muted autoplay; if even that is refused (data
-    // saver, some phones), offer a tap to play.
-    v.play().catch(() => setBlocked(true));
-  }, []);
-
-  const onTime = () => {
-    const v = video.current;
-    if (v && bar.current && v.duration) bar.current.style.transform = `scaleX(${v.currentTime / v.duration})`;
-  };
-
-  const onEnded = () => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const next = document.getElementById(nextId);
-    if (next) scrollToElement(next, 2);
-  };
-
+/*
+  A deliberate typographic first screen. The studio has no reel to show
+  yet, and a borrowed clip would say nothing true about it, so the type
+  carries the screen: the statement at display size across the full
+  width, the sentence and the action under it, and the five things the
+  studio makes listed along the foot where a strip of thumbnails would
+  otherwise run.
+*/
+export function Hero() {
   return (
-    <section ref={root} aria-labelledby="hero-title" className="relative h-svh min-h-[560px] w-full overflow-hidden bg-night text-ivory">
-      <div className="hero-film absolute inset-0">
-        <video
-          ref={video}
-          className="h-full w-full object-cover"
-          poster={showreel.poster ?? ambientClip.poster}
-          muted
-          playsInline
-          autoPlay
-          preload="auto"
-          onTimeUpdate={onTime}
-          onEnded={onEnded}
-          aria-label={showreel.src ? `${site.name} showreel: the two founders` : "Marine Drive, Bombay, at dusk"}
-        >
-          {showreel.src ? (
-            <source src={showreel.src} />
-          ) : (
-            <>
-              <source src={ambientClip.mp4} type="video/mp4" />
-              <source src={ambientClip.webm} type="video/webm" />
-            </>
-          )}
-        </video>
-        <div className="absolute inset-0 bg-night/15" aria-hidden="true" />
+    <section className="flex min-h-svh flex-col bg-bg">
+      <Nav eager />
+
+      <div className="frame mt-auto pt-20">
+        <h1 className="display">
+          <span data-hero-line className="block">
+            We shoot
+          </span>
+          <span data-hero-line className="block">
+            and build
+          </span>
+        </h1>
+
+        <div className="mt-10 grid gap-y-8 lg:grid-cols-12 lg:items-end lg:gap-x-8">
+          <p data-hero-sub className="lede lg:col-span-6">
+            A studio making video, cinematic shots, and the websites and
+            systems they live on.
+          </p>
+
+          <div
+            data-hero-sub
+            className="flex flex-wrap items-center gap-x-6 gap-y-4 lg:col-span-5 lg:col-start-8 lg:justify-end"
+          >
+            <Link href="#brief" className="button">
+              Start a brief
+            </Link>
+            <Link href="/work" className="small link uppercase">
+              See the work
+            </Link>
+          </div>
+        </div>
       </div>
 
-      {blocked && (
-        <button
-          type="button"
-          onClick={() => video.current?.play().then(() => setBlocked(false))}
-          className="pill absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-ivory text-ivory"
+      {/* The foot of the screen: what the studio makes, in one line. */}
+      <div className="frame mt-auto border-0 pt-16 pb-[var(--margin)]">
+        <ul
+          data-hero-sub
+          className="flex flex-wrap items-baseline gap-x-8 gap-y-2"
         >
-          Play
-        </button>
-      )}
-
-      <div className="frame absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 pb-[var(--margin)]">
-        <h1 id="hero-title" className="hero-corner caps max-w-[30ch]">
-          {site.name}
-          <span className="block text-ivory/65">Websites, apps and films, made in Bombay</span>
-        </h1>
-        <p className="hero-corner caps flex items-center gap-3 text-ivory/80">
-          Scroll
-          <span className="relative block h-px w-14 bg-ivory/30" aria-hidden="true">
-            <span ref={bar} className="absolute inset-0 origin-left scale-x-0 bg-ivory" />
-          </span>
-        </p>
+          {services.map((craft) => (
+            <li key={craft.slug}>
+              <Link
+                href={`/services#${craft.slug}`}
+                className="link text-[length:var(--step-lead)] leading-none font-black tracking-[-0.03em] text-muted uppercase transition-colors duration-200 hover:text-ink"
+              >
+                {craft.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

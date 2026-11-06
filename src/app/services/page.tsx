@@ -6,7 +6,7 @@ import { pageMetadata } from "@/lib/seo";
 import { services, site } from "@/lib/site";
 
 const description =
-  "Creative websites, MERN stack web apps, custom CRMs, CMS platforms and films from Bombaycraft, a digital studio in Bombay.";
+  "Video, cinematic shots, websites, web apps, CRM and CMS from Bombaycraft, a creative studio in Bombay.";
 
 export const metadata: Metadata = pageMetadata({ title: "Services", description, path: "/services" });
 
@@ -31,10 +31,8 @@ export default function ServicesPage() {
     <>
       <JsonLd data={servicesJsonLd} />
       <PageHero
-        label="I — Services"
-        title="Five crafts"
-        flourish="one atelier"
-        intro="The website people see, the software your team runs on, and the films that tell your story."
+        title="Services"
+        intro="The camera first, then everything that carries what it shoots."
       />
       <ServiceDetails />
     </>

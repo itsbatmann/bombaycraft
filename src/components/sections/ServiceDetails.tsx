@@ -1,48 +1,100 @@
-import { mailto, services } from "@/lib/site";
+import Link from "next/link";
+import { Frame } from "@/components/Frame";
+import { comingSoon, mailto, services } from "@/lib/site";
 
-const ROMAN = ["I", "II", "III", "IV", "V"];
+/*
+  Each service on its own panel, alternating one tone step so neighbours
+  never share a ground. Two of them carry a frame, so the page is not
+  five text blocks in a row.
+*/
+const TONE = ["bg-bg", "bg-surface", "bg-bg", "bg-surface", "bg-bg"];
+const WITH_FRAME = new Set([0, 1]);
 
-// Each craft in full: the name stays pinned on the left while what you get
-// scrolls past on the right.
 export function ServiceDetails() {
   return (
-    <section aria-labelledby="details-heading" className="frame bg-bg pb-28 md:pb-44">
-      <div className="caps rule flex justify-between gap-6 border-b pb-4">
-        <h2 id="details-heading">II — In detail</h2>
-        <span className="text-dim">What each craft includes</span>
-      </div>
-
-      {services.map((s, i) => (
-        <article key={s.slug} className="grid gap-10 pt-20 md:pt-28 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-24">
-              <p className="font-serif text-3xl text-gold italic">{ROMAN[i]}</p>
-              <h3 className="heading mt-4">{s.title}</h3>
-              <p className="script mt-4 text-4xl">{s.tagline}</p>
-            </div>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <p data-reveal className="max-w-[46ch] text-xl leading-snug text-dim">
-              {s.summary}
-            </p>
-            <h4 className="caps mt-12 text-dim">What you get</h4>
-            <ul className="mt-6 space-y-4">
-              {s.deliverables.map((item) => (
-                <li key={item} data-reveal className="flex items-baseline gap-4 font-serif text-2xl">
-                  <span className="mt-[0.9em] block size-1.5 shrink-0 rounded-full bg-gold" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-10 flex flex-wrap items-center justify-between gap-6">
-              <p className="caps text-dim">{s.stack}</p>
-              <a href={mailto(`${s.title} with Bombaycraft`)} className="pill">
-                {s.action}
+    <>
+      {services.map((craft, i) => (
+        <section
+          key={craft.slug}
+          id={craft.slug}
+          aria-labelledby={`${craft.slug}-heading`}
+          className={`${TONE[i % TONE.length]} py-[var(--gap)]`}
+        >
+          <div className="frame grid gap-y-10 md:grid-cols-12 md:gap-x-8">
+            <div className="md:col-span-6">
+              <h2 id={`${craft.slug}-heading`} className="heading">
+                {craft.title}
+              </h2>
+              <p className="lede mt-7">{craft.summary}</p>
+              <a
+                href={mailto(`${craft.action} — Bombaycraft`)}
+                className="button mt-8"
+              >
+                {craft.action}
               </a>
             </div>
+
+            <div className="md:col-span-5 md:col-start-8">
+              <h3 className="text-[length:var(--step-lead)] leading-none font-black tracking-[-0.03em] uppercase">
+                What you get
+              </h3>
+              <ul className="mt-5 space-y-3.5">
+                {craft.deliverables.map((item) => (
+                  <li key={item} className="leading-tight text-ink/85">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-7 font-bold text-accent">{craft.stack}</p>
+            </div>
+
+            {WITH_FRAME.has(i) ? (
+              <div className="md:col-span-12">
+                <Frame
+                  slate={craft.title}
+                  meta="Coming soon"
+                  ratio="aspect-[5/2]"
+                  note={`A ${craft.title.toLowerCase()} frame, reserved for the studio’s own work.`}
+                />
+              </div>
+            ) : null}
           </div>
-        </article>
+        </section>
       ))}
-    </section>
+
+      <section
+        aria-labelledby="coming-heading"
+        className="bg-surface-2 py-[var(--gap)]"
+      >
+        <div className="frame grid gap-y-8 md:grid-cols-12 md:items-end md:gap-x-8">
+          <h2 id="coming-heading" className="heading md:col-span-6">
+            {comingSoon.title}
+          </h2>
+          <div className="md:col-span-5 md:col-start-8">
+            <p className="lede">{comingSoon.line}</p>
+            <p className="small mt-5 text-accent uppercase">From 2027</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="all-crafts-heading" className="bg-bg py-[var(--gap)]">
+        <div className="frame grid gap-y-8 md:grid-cols-12 md:items-end md:gap-x-8">
+          <h2 id="all-crafts-heading" className="heading md:col-span-6">
+            Need more
+            <br />
+            than one?
+          </h2>
+          <div className="md:col-span-5 md:col-start-8">
+            <p className="lede">
+              Most projects are two or three of these at once. One team, one
+              timeline, one invoice.
+            </p>
+            <Link href="/contact" className="button mt-7">
+              Start a brief
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

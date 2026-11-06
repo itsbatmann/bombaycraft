@@ -1,37 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Montserrat, Pinyon_Script, Tiro_Devanagari_Marathi } from "next/font/google";
+import { Chivo, Tiro_Devanagari_Marathi } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
-import { ScrollReveal } from "@/components/ScrollReveal";
+import { Motion } from "@/components/Motion";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-// Bodoni for display and statements, Pinyon Script for flourishes,
-// Montserrat for small capitals and running text.
-const bodoni = Bodoni_Moda({
-  variable: "--font-bodoni",
+// One family does the visible work: Chivo, 900 for the shouting, 400 and
+// 700 for everything else.
+const chivo = Chivo({
+  variable: "--font-chivo",
   subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
+  weight: ["400", "700", "900"],
   display: "swap",
 });
 
-const pinyon = Pinyon_Script({
-  variable: "--font-pinyon",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
-
-// Only used for the Marathi phrase in the preloader.
+// The second script, which the wordmark already uses.
 const devanagari = Tiro_Devanagari_Marathi({
   variable: "--font-devanagari",
   subsets: ["devanagari"],
@@ -80,7 +65,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#3f2305",
+  themeColor: "#0b0b0b",
 };
 
 const organizationJsonLd = {
@@ -119,12 +104,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en-IN"
-      className={`${bodoni.variable} ${pinyon.variable} ${montserrat.variable} ${devanagari.variable} h-full antialiased`}
+      className={`${chivo.variable} ${devanagari.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-full focus:bg-gold focus:px-4 focus:py-2 focus:text-night"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:bg-accent focus:px-4 focus:py-2 focus:font-bold focus:text-black"
         >
           Skip to content
         </a>
@@ -135,7 +120,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <SmoothScroll />
-        <ScrollReveal />
+        <Motion />
       </body>
     </html>
   );

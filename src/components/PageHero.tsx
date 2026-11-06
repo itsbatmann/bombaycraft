@@ -1,39 +1,20 @@
-import { Logo } from "./Logo";
+import { Nav } from "./Nav";
 
-// Top of every inner page: the mark (which links home), a Bodoni title
-// with a script flourish, and one sentence. Type only.
-export function PageHero({
-  label,
-  title,
-  flourish,
-  intro,
-}: {
-  label: string;
-  title: string;
-  flourish: string;
-  intro: string;
-}) {
+// The top of every inner page: the bar, the title in the page's one h1
+// at display size, one sentence beside it, on the black field.
+export function PageHero({ title, intro }: { title: string; intro: string }) {
   return (
-    <section className="frame flex min-h-[88svh] flex-col bg-bg pt-[var(--margin)] pb-24 md:pb-32">
-      <div className="flex items-start justify-between gap-6">
-        <Logo priority className="h-12 w-auto md:h-16" />
-        <p className="caps text-dim">Digital studio, Bombay</p>
-      </div>
+    <section className="flex min-h-[60svh] flex-col bg-bg">
+      <Nav eager />
 
-      <div className="mt-auto pt-24">
-        <div className="caps rule flex justify-between gap-6 border-b pb-4">
-          <span>{label}</span>
-          <span className="text-dim">Est. Bombay</span>
-        </div>
-        <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:items-end">
-          <h1 data-reveal className="display lg:col-span-8">
-            {title}
-            <span className="script mt-2 block pl-[12%] text-[0.62em]">{flourish}</span>
-          </h1>
-          <p data-reveal className="max-w-[32ch] text-lg leading-snug text-dim lg:col-span-4 lg:justify-self-end lg:text-right">
-            {intro}
-          </p>
-        </div>
+      <div className="frame mt-auto grid gap-y-8 pt-20 pb-24 lg:grid-cols-12 lg:items-end lg:gap-x-8">
+        <h1 data-hero-line className="display lg:col-span-7">
+          {title}
+        </h1>
+
+        <p data-hero-sub className="lede lg:col-span-4 lg:col-start-9">
+          {intro}
+        </p>
       </div>
     </section>
   );

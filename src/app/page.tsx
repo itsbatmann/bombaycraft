@@ -1,19 +1,21 @@
 import { Hero } from "@/components/Hero";
-import { Atelier } from "@/components/sections/Atelier";
-import { Numbers } from "@/components/sections/Numbers";
-import { Stranger } from "@/components/sections/Stranger";
-import { WhatWeDo } from "@/components/sections/WhatWeDo";
-import { WorkBento } from "@/components/sections/WorkBento";
+import { Bombay } from "@/components/sections/Bombay";
+import { Brief } from "@/components/sections/Brief";
+import { Crafts } from "@/components/sections/Crafts";
+import { Figure } from "@/components/sections/Figure";
+import { Process } from "@/components/sections/Process";
+import { Work } from "@/components/sections/Work";
 
 export default function Home() {
   return (
     <>
-      <Hero nextId="work" />
-      <WorkBento />
-      <WhatWeDo />
-      <Numbers />
-      <Atelier />
-      <Stranger />
+      <Hero />
+      <Work />
+      <Crafts />
+      <Process />
+      <Figure />
+      <Bombay />
+      <Brief />
     </>
   );
 }

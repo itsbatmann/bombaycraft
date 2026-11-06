@@ -1,82 +1,112 @@
 import Link from "next/link";
-import { LiveClock } from "./sections/LiveClock";
 import { site } from "@/lib/site";
 
-// The close, on the inverse field: the name first, the ways to reach the
-// studio under it, the small links beside them.
+/*
+  "Invitation over a cropped name": the close and the footer in one
+  field. The wordmark fills the bottom, larger than the screen can hold,
+  pushed down so the edge cuts through the letters.
+*/
 export function Footer() {
   return (
-    <footer className="frame flex min-h-[90svh] flex-col bg-night pt-12 pb-[var(--margin)] text-ivory">
-      <p className="font-serif text-[18vw] leading-[0.82] tracking-[-0.045em] [font-variation-settings:'opsz'_96]" aria-hidden="true">
-        Bombay<span className="font-script text-[0.82em] tracking-normal text-sand">craft</span>
-      </p>
+    <footer className="relative flex flex-col overflow-hidden bg-surface pt-[var(--gap)]">
+      <div className="frame lg:grid lg:grid-cols-12 lg:items-start lg:gap-8">
+        <div className="lg:col-span-7">
+          <h2 className="heading">
+            Let&apos;s roll
+            <br />
+            something
+          </h2>
+          <p className="lede mt-6">
+            A film, a cinematic shoot, a website, or the system behind it.
+            Tell us which, and when you need it.
+          </p>
+          <Link href="/contact" className="button mt-7">
+            Start a brief
+          </Link>
+        </div>
 
-      <div className="mt-20 grid gap-12 lg:grid-cols-12">
-        <ul className="font-serif text-[clamp(1.75rem,2.6vw,2.25rem)] leading-tight text-sand lg:col-span-5">
-          <li>
-            <a href={`mailto:${site.email}`} className="transition-colors hover:text-ivory">
-              {site.email}
-            </a>
-          </li>
-          <li>
-            <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="transition-colors hover:text-ivory">
-              {site.phone}
-            </a>
-          </li>
-          <li className="text-ivory/70">
-            {site.address.locality} {site.address.postalCode}, India
-          </li>
-        </ul>
-
-        <div className="caps grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-6 lg:col-start-7">
-          <nav aria-label="Footer">
-            <p className="text-ivory/55">Pages</p>
-            <ul className="mt-3 space-y-1.5">
+        <nav
+          aria-label="Footer"
+          className="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 lg:col-span-5 lg:col-start-8 lg:mt-0"
+        >
+          <div>
+            <h3 className="small text-muted uppercase">Pages</h3>
+            <ul className="mt-3 space-y-2">
               {site.nav.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="link">
+                  <Link href={item.href} className="link font-bold">
                     {item.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/credits" className="link">
+                <Link href="/credits" className="link font-bold">
                   Credits
                 </Link>
               </li>
             </ul>
-          </nav>
+          </div>
+
           <div>
-            <p className="text-ivory/55">Elsewhere</p>
-            <ul className="mt-3 space-y-1.5">
+            <h3 className="small text-muted uppercase">Reach us</h3>
+            <ul className="mt-3 space-y-2">
               <li>
-                <a href={site.socials.instagram} target="_blank" rel="noopener noreferrer" className="link">
+                <a href={`mailto:${site.email}`} className="link font-bold break-all">
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="link font-bold">
+                  {site.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link font-bold"
+                >
                   Instagram
                 </a>
               </li>
               <li>
-                <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" className="link">
+                <a
+                  href={site.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link font-bold"
+                >
                   LinkedIn
                 </a>
               </li>
             </ul>
           </div>
-          <div>
-            <p className="text-ivory/55">Studio</p>
-            <p className="mt-3">{site.hours}</p>
-            <p className="mt-1.5 text-sand">
-              <LiveClock />
-            </p>
-          </div>
-        </div>
+        </nav>
       </div>
 
-      <div className="caps mt-auto flex flex-wrap justify-between gap-4 pt-24 text-ivory/55">
-        <p>© {site.name} 2026. Made by hand in Bombay.</p>
-        <a href="#main" className="link text-ivory">
-          Back to top
-        </a>
+      {/* The credits row sits directly above the wordmark's cap line. */}
+      <div className="frame mt-16 flex flex-wrap justify-between gap-x-8 gap-y-2 pt-8 text-[length:var(--step-small)] text-muted">
+        <p>
+          © {site.name} 2026 · {site.address.locality}, {site.address.region} ·{" "}
+          {site.hours}
+        </p>
+        <p>
+          Placeholder footage from Wikimedia Commons ·{" "}
+          <Link href="/credits" className="link font-bold text-ink">
+            credits
+          </Link>
+        </p>
       </div>
+
+      {/* The name, larger than the viewport can hold, cropped by the edge. */}
+      <p
+        aria-hidden="true"
+        className="frame mt-6 translate-y-[30%] font-black tracking-[-0.055em] whitespace-nowrap text-ink uppercase"
+        style={{ fontSize: "var(--step-mega)", lineHeight: 0.8 }}
+      >
+        Bombaycraft
+      </p>
     </footer>
   );
 }

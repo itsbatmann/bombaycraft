@@ -1,167 +1,275 @@
 @import "tailwindcss";
 
 /*
-  Bombay Deco, in four colours:
-    #F5F5F5 off-white, #F2EAD3 cream, #DFD7BF sand, #3F2305 deep brown.
-  Cream and sand grounds with brown ink; brown blocks with cream on them.
+  BOMBAYCRAFT — cinematic black.
+
+  A projection room, not a poster. The page is near-black from top to
+  bottom; off-white is the ink; one hot orange is the only colour on it,
+  and it is spent on the action and almost nothing else. Surfaces are
+  separated by a step in tone, never by a line. The footage is the colour.
 */
 :root {
-  --bg: #f2ead3;
-  --bg-2: #dfd7bf;
-  --fg: #3f2305;
-  --dim: rgb(63 35 5 / 0.72);
-  --gold: #3f2305;
-  --rule: rgb(63 35 5 / 0.25);
-  --ticket: #3f2305;
-  --ticket-ink: #f5f5f5;
+  --bg: #0a0a0b;
+  --surface: #131315;
+  --surface-2: #1d1d20;
+  --ink: #f2f2f0;
+  --muted: #a6a6a1;
+
+  --accent: #ff5a1f;
+  --accent-ink: #0a0a0b;
+
+  /* The one field that is not black: the accent, used whole, once. */
+  --field-accent: #ff5a1f;
+  --field-accent-ink: #0a0a0b;
+
+  /* One pair of outer margins for the whole page. */
+  --margin: clamp(1.25rem, 2.4vw, 1.75rem);
+  /* One gap between sections. */
+  --gap: clamp(7.5rem, 11vw, 15rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-bg-2: var(--bg-2);
-  --color-fg: var(--fg);
-  --color-dim: var(--dim);
-  --color-gold: var(--gold);
-  --color-rule: var(--rule);
-  --color-ticket: var(--ticket);
-  --color-ticket-ink: var(--ticket-ink);
-  --color-ivory: #f5f5f5;
-  --color-cream: #f2ead3;
-  --color-sand: #dfd7bf;
-  --color-night: #3f2305;
-  --color-terracotta: #b04024;
-  --font-serif: var(--font-bodoni);
-  --font-script: var(--font-pinyon);
-  --font-sans: var(--font-montserrat);
-  --font-marathi: var(--font-devanagari);
-}
-
-:root {
-  --margin: clamp(1.25rem, 3vw, 3rem);
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --font-sans: var(--font-chivo);
+  --font-deva: var(--font-devanagari);
 }
 
 html {
   background: var(--bg);
+  /* Lenis drives the scrolling; never let the browser fight it. */
+  scroll-behavior: auto;
 }
 
 body {
   background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  color: var(--ink);
+  font-family: var(--font-chivo), ui-sans-serif, system-ui, sans-serif;
+  font-size: var(--step-body);
   font-weight: 400;
-  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
-  line-height: 1.7;
-  transition:
-    background-color 0.7s ease,
-    color 0.7s ease;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/*
+  Five steps do the visible work, plus two that exist only for the two
+  single moments bigger than a heading: the figure and the footer's name.
+*/
+:root {
+  --step-small: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --step-lead: clamp(1.25rem, 1.05rem + 0.75vw, 1.75rem);
+  --step-head: clamp(2.25rem, 1rem + 5.2vw, 5.25rem);
+  --step-display: clamp(3.25rem, 0.5rem + 11.5vw, 12rem);
+  --step-figure: clamp(9rem, 23vw, 23.75rem);
+  --step-mega: 27vw;
 }
 
 ::selection {
-  background: var(--gold);
-  color: var(--bg);
+  background: var(--accent);
+  color: var(--accent-ink);
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 4px;
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
 }
 
+/* On a field whose ink is dark, the focus ring must be dark too. */
+[data-ink="dark"] :focus-visible {
+  outline-color: var(--bg);
+}
+
+/* ---- The frame: one pair of margins, used everywhere ---- */
 @utility frame {
   padding-inline: var(--margin);
 }
 
-/* Small capitals in Montserrat: labels, details, buttons */
-@utility caps {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  line-height: 1.6;
+/* ---- Type ---- */
+
+/* Chivo 900, set tight, in capitals. The page's loud voice. */
+@utility display {
+  font-size: var(--step-display);
+  font-weight: 900;
+  line-height: 0.84;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+@utility heading {
+  font-size: var(--step-head);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
   text-transform: uppercase;
 }
 
-/* Bodoni at poster size */
-@utility display {
-  font-family: var(--font-serif);
-  font-size: clamp(4rem, 13vw, 13.5rem);
-  font-weight: 400;
-  line-height: 0.82;
-  letter-spacing: -0.035em;
-  font-variation-settings: "opsz" 96;
-}
-
-/* Bodoni section titles */
-@utility heading {
-  font-family: var(--font-serif);
-  font-size: clamp(2.75rem, 7vw, 7rem);
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: -0.03em;
-  font-variation-settings: "opsz" 96;
-}
-
-/* Bodoni italic for statements */
+/* A statement is a paragraph, and stays paragraph-sized. */
 @utility lede {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.75rem);
+  font-size: var(--step-lead);
   font-weight: 400;
-  line-height: 1.18;
-  letter-spacing: -0.01em;
-  font-variation-settings: "opsz" 48;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  max-width: 38ch;
 }
 
-/* Pinyon Script flourish */
-@utility script {
-  font-family: var(--font-script);
+@utility small {
+  font-size: var(--step-small);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+/*
+  The idea: the wordmark is Latin over Devanagari, the way a Bombay
+  signwriter paints a name. Everything the page announces is announced
+  twice. This is the second script.
+*/
+@utility deva {
+  font-family: var(--font-devanagari), serif;
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
-  line-height: 1;
-  color: var(--gold);
+  line-height: 1.1;
 }
 
-/* Deco rule: a fine gold line */
-@utility rule {
-  border-color: var(--rule);
-}
-
-/* The one button: a gold-edged pill that fills on hover */
-@utility pill {
+/* ---- The one button: flat, square, one fill ---- */
+@utility button {
   display: inline-flex;
   align-items: center;
-  gap: 0.75em;
-  min-height: 3rem;
-  padding: 0 1.6rem;
-  border: 1px solid var(--gold);
-  border-radius: 999px;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 3.5rem;
+  padding: 0 1.75rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--step-small);
+  font-weight: 900;
+  letter-spacing: 0;
   text-transform: uppercase;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
   transition:
-    background-color 0.4s var(--ease-out),
-    color 0.4s var(--ease-out);
+    background-color 0.25s ease,
+    transform 0.25s var(--ease-out);
   &:hover {
-    background: var(--gold);
+    background: var(--field-yellow);
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+/* On an orange field the button inverts so it still reads. */
+@utility button-ink {
+  background: var(--bg);
+  color: var(--ink);
+  &:hover {
+    background: var(--field-paper);
     color: var(--bg);
   }
 }
 
 @utility link {
   text-decoration-line: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.3em;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.28em;
   text-decoration-color: transparent;
-  transition: text-decoration-color 0.3s var(--ease-out), color 0.3s;
+  transition:
+    text-decoration-color 0.25s ease,
+    color 0.25s ease;
   &:hover {
     text-decoration-color: currentColor;
   }
 }
 
-/* Lenis smooth scrolling */
+/*
+  The brief is a coupon to tear out: semicircular notches bitten out of two
+  opposite edges at the 46% mark, with the perforation running between
+  them. Upright on a phone, landscape from `md` up.
+*/
+@utility coupon {
+  --notch: 22px;
+  -webkit-mask-image:
+    radial-gradient(circle var(--notch) at 0% 46%, transparent 97%, #000 100%), /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+    radial-gradient(circle var(--notch) at 100% 46%, transparent 97%, #000 100%); /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+  mask-image:
+    radial-gradient(circle var(--notch) at 0% 46%, transparent 97%, #000 100%), /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+    radial-gradient(circle var(--notch) at 100% 46%, transparent 97%, #000 100%); /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+
+  @media (width >= 48rem) {
+    --notch: 26px;
+    -webkit-mask-image:
+      radial-gradient(circle var(--notch) at 46% 0%, transparent 97%, #000 100%), /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+      radial-gradient(circle var(--notch) at 46% 100%, transparent 97%, #000 100%); /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+    mask-image:
+      radial-gradient(circle var(--notch) at 46% 0%, transparent 97%, #000 100%), /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+      radial-gradient(circle var(--notch) at 46% 100%, transparent 97%, #000 100%); /* taste-skill-ignore: a mask that bites the notches out, not a fill */
+  }
+}
+
+/* A chip in the brief builder: a filled block that fills when chosen. */
+/* A chip in the brief builder: a tone step that fills with the accent. */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0 1.1rem;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--step-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s var(--ease-out);
+  &:hover {
+    background: color-mix(in srgb, var(--surface-2) 60%, var(--ink) 18%);
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+/* The chip once it is chosen: the accent, used small. */
+@utility chip-on {
+  background: var(--accent);
+  color: var(--accent-ink);
+  &:hover {
+    background: var(--accent);
+  }
+}
+
+/*
+  A film frame. Every piece of work and the showreel sit in one of these:
+  16:9, square corners, a tone step above the page, with the slate line
+  along its top. They are empty until the studio's own footage lands.
+*/
+@utility frame-16 {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+/* ---- Lenis ---- */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -173,8 +281,22 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* ---- Motion: every move keeps its finished state when motion is reduced ---- */
+[data-reveal] {
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

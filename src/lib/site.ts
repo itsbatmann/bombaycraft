@@ -4,22 +4,24 @@
 export const site = {
   name: "Bombaycraft",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://bombaycraft.com",
-  tagline: "Websites, CRMs, CMS & films, made in Bombay",
+  tagline: "Video, cinematic shots and the websites they live on",
   description:
-    "Bombaycraft is a Bombay digital studio building creative websites, MERN stack web apps, custom CRMs, CMS platforms and films for brands that want to be remembered.",
+    "Bombaycraft is a creative studio making video, cinematic shots, websites and the software behind them. One team from the camera to the code.",
   keywords: [
-    "web design agency Mumbai",
+    "video production agency",
+    "cinematic brand films",
     "creative website design",
     "MERN stack development",
     "custom CRM development",
     "CMS website development",
-    "video production Mumbai",
     "digital agency Mumbai",
   ],
   email: "hello@bombaycraft.com",
+  // PLACEHOLDER: replace with the studio's real number before launch.
   phone: "+91 00000 00000",
   hours: "Mon to Sat, 10 to 7",
   address: {
+    // PLACEHOLDER: replace with the studio's real address before launch.
     street: "Your street address",
     locality: "Mumbai",
     region: "Maharashtra",
@@ -31,153 +33,218 @@ export const site = {
     linkedin: "https://linkedin.com/company/bombaycraft",
   },
   nav: [
-    { label: "Services", href: "/services" },
     { label: "Work", href: "/work" },
-    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Studio", href: "/about" },
     { label: "Contact", href: "/contact" },
   ],
 } as const;
 
 // Opens the visitor's email with the subject filled in.
-export const mailto = (subject: string) =>
-  `mailto:${site.email}?subject=${encodeURIComponent(subject)}`;
+export const mailto = (subject: string, body?: string) =>
+  `mailto:${site.email}?subject=${encodeURIComponent(subject)}${
+    body ? `&body=${encodeURIComponent(body)}` : ""
+  }`;
 
-export const services = [
+export type Craft = {
+  slug: string;
+  title: string;
+  summary: string;
+  stack: string;
+  deliverables: readonly string[];
+  action: string;
+};
+
+/* The camera comes first: it is what the studio is known for. */
+export const services: readonly Craft[] = [
   {
-    slug: "creative-websites",
-    deliverables: ["Strategy and sitemap","Art direction and design","Animated build in Next.js","SEO and analytics setup","Content management","Launch and care"],
-    tagline: "that people remember",
-    slide: "Websites",
-    short: "Websites",
-    title: "Creative websites",
+    slug: "video",
+    title: "Video",
     summary:
-      "Bold, animated, search-friendly websites that make your brand impossible to scroll past.",
+      "Brand films, launch films and campaign cut-downs, written, shot and finished in one place.",
+    stack: "Script, shoot, edit, grade, sound",
+    deliverables: [
+      "Concept and script",
+      "Casting, location and shoot plan",
+      "Direction and camera",
+      "Edit, colour and sound",
+      "Cut-downs for every channel",
+    ],
+    action: "Book a shoot",
+  },
+  {
+    slug: "cinematic",
+    title: "Cinematic shots",
+    summary:
+      "Product, food, interior and process work shot like a film rather than a catalogue: one light, one move, one idea.",
+    stack: "Cinema camera, motion control, grade",
+    deliverables: [
+      "Shot list and look reference",
+      "Lighting and set design",
+      "Motion control and slow motion",
+      "Product and macro work",
+      "Stills pulled from the same setup",
+    ],
+    action: "Plan a shoot",
+  },
+  {
+    slug: "websites",
+    title: "Websites",
+    summary:
+      "Fast, animated, search-friendly sites built to carry the footage rather than squeeze it into a corner.",
     stack: "Next.js, GSAP, headless CMS",
+    deliverables: [
+      "Strategy and sitemap",
+      "Art direction and design",
+      "Animated build in Next.js",
+      "Video delivery and compression",
+      "SEO, analytics and launch",
+    ],
     action: "Start a website",
   },
   {
-    slug: "mern-stack",
-    deliverables: ["Product discovery","User flows and interface","React front end","Node and Express APIs","MongoDB data design","Deployment and monitoring"],
-    tagline: "that carry the load",
-    slide: "Web apps",
-    short: "MERN apps",
-    title: "MERN web apps",
+    slug: "web-apps",
+    title: "Web apps",
     summary:
-      "Custom web apps on MongoDB, Express, React and Node, built around the way your team works.",
+      "Custom applications on MongoDB, Express, React and Node, built around the way your team actually works.",
     stack: "MongoDB, Express, React, Node",
+    deliverables: [
+      "Product discovery",
+      "User flows and interface",
+      "React front end",
+      "Node and Express APIs",
+      "Deployment and monitoring",
+    ],
     action: "Plan an app",
   },
   {
-    slug: "crm",
-    deliverables: ["Pipeline and process mapping","Lead capture and import","Roles and permissions","Quotes, tasks and reminders","Reports and dashboards","Training for your team"],
-    tagline: "that never lose a lead",
-    slide: "CRMs",
-    short: "CRMs",
-    title: "Custom CRMs",
+    slug: "crm-cms",
+    title: "CRM and CMS",
     summary:
-      "Leads, sales and customers in one place, with the pipeline, reports and roles you need.",
-    stack: "Pipelines, roles, reports",
-    action: "Scope a CRM",
+      "The systems behind the site: one pipeline for your leads, one editor your team can run without a developer.",
+    stack: "Pipelines, roles, reports, Sanity, Payload",
+    deliverables: [
+      "Pipeline and process mapping",
+      "Lead capture and reporting",
+      "Roles, permissions and approvals",
+      "Content modelling",
+      "Training and handover",
+    ],
+    action: "Scope a system",
+  },
+];
+
+/* What is not on the menu yet, said plainly. */
+export const comingSoon = {
+  title: "Marketing",
+  line: "Paid media, performance and campaign strategy join the studio next year. Until then we will happily point you at people we trust.",
+};
+
+/* The four stages. Read in order they are the process. */
+export const stages = [
+  {
+    verb: "Scope",
+    line: "One call, then a written scope: what we make, what it costs, and what it does not include.",
   },
   {
-    slug: "cms",
-    deliverables: ["Content modelling","An editor your team enjoys","Pages, blogs and catalogues","Roles and approvals","Image and SEO controls","Training and handover"],
-    tagline: "you can run yourself",
-    slide: "CMS",
-    short: "CMS",
-    title: "CMS platforms",
-    summary:
-      "Websites your team updates in minutes: pages, blogs and catalogues without a developer.",
-    stack: "Sanity, Strapi, Payload",
-    action: "Set up a CMS",
+    verb: "Board",
+    line: "Treatment, shot list and art direction. You see the film and the site at full size before anyone rolls or builds.",
   },
   {
-    slug: "media",
-    deliverables: ["Concept and script","Shoot planning in Bombay","Direction and camera","Edit, colour and sound","Reels and cut-downs","Motion graphics"],
-    tagline: "that move people",
-    slide: "Films",
-    short: "Films",
-    title: "Films and media",
-    summary:
-      "Brand films, reels, product shoots and motion graphics, shot and cut in Bombay.",
-    stack: "Films, reels, motion",
-    action: "Book a shoot",
+    verb: "Shoot",
+    line: "Three days or thirty. Our crew, our kit, your product, and a monitor you are welcome to stand behind.",
+  },
+  {
+    verb: "Ship",
+    line: "Graded, mastered, deployed and measured. You get the keys, the project files and a number to call.",
   },
 ] as const;
 
-// PLACEHOLDERS: replace with the two co-founders' real names and roles.
-export const founders = [
-  { name: "Founder name", role: "Co-founder · Design and film", bio: "Leads art direction, brand films and everything people see first." },
-  { name: "Founder name", role: "Co-founder · Technology", bio: "Leads the build: websites, MERN web apps, CRMs and CMS platforms." },
-];
-
-// Videos: host large files on a CDN (Cloudinary, Mux, Vercel Blob, Bunny)
-// rather than in git, then paste the URL here.
-export const showreel: { src: string | null; poster: string | null } = {
-  src: null, // e.g. "https://cdn.example.com/bombaycraft-founders.mp4"
-  poster: null,
-};
-
-// Plays in the hero until the founders' film is ready: Marine Drive at
-// dusk, 30 seconds, from Wikimedia Commons (credited on /credits).
-export const ambientClip = {
-  mp4: "/media/marine-drive.mp4",
-  webm: "/media/marine-drive.webm",
-  poster: "/media/marine-drive.jpg",
-};
-
-// TEMPORARY numbers: replace with the real ones before launch.
-export const numbers = [
-  { figure: "24", caption: "projects shipped since 2023" },
-  { figure: "5", caption: "crafts under one roof" },
-];
-
-// SAMPLE projects so the layout can be seen at full density.
-// Replace with real work before launch.
+/*
+  SAMPLE PROJECTS so the layout can be seen at full density. Replace every
+  one with real work before launch. Each is shown as an empty film frame:
+  nothing on this site pretends to be footage the studio has not shot.
+*/
 export type Project = {
   name: string;
-  category: string;
-  kind: "website" | "crm" | "film" | "cms";
-  description: string;
-  video: string | null;
-  poster: string | null;
+  kind: string;
+  year: string;
+  line: string;
+  runtime: string;
 };
 
 export const projects: Project[] = [
   {
+    name: "Ridgeline",
+    kind: "Brand film",
+    year: "2025",
+    line: "A ninety-second film for an outerwear label, shot over three wet nights and cut for cinema, social and the site hero.",
+    runtime: "1:30",
+  },
+  {
+    name: "Still Water",
+    kind: "Cinematic product",
+    year: "2025",
+    line: "Forty macro shots of a single bottle on motion control, lit once and graded cold, delivered as film and as stills.",
+    runtime: "0:45",
+  },
+  {
     name: "Chowpatty Coffee",
-    category: "Creative website",
-    kind: "website",
-    description:
-      "A roastery by the sea needed a site as warm as its counter. We built an animated storefront with a menu that updates itself, online orders and pages that load before the kettle boils.",
-    video: null,
-    poster: null,
+    kind: "Website",
+    year: "2024",
+    line: "A roastery storefront with a menu that updates itself, online orders, and pages that load before the kettle boils.",
+    runtime: "—",
   },
   {
     name: "Fort Freight",
-    category: "Custom CRM",
-    kind: "crm",
-    description:
-      "A logistics firm tracked leads in four spreadsheets. We replaced them with one CRM: a shared pipeline, quotes in two clicks, roles for every desk and a weekly report that writes itself.",
-    video: null,
-    poster: null,
+    kind: "CRM",
+    year: "2024",
+    line: "Four spreadsheets replaced by one pipeline, quotes in two clicks and a weekly report that writes itself.",
+    runtime: "—",
   },
   {
-    name: "Monsoon Edit",
-    category: "Brand film",
-    kind: "film",
-    description:
-      "A ninety-second film for a fashion label, shot on Marine Drive over three wet nights. Cut for cinema, reels and the website hero, with a grade built around the city lights.",
-    video: null,
-    poster: null,
+    name: "Nightshift",
+    kind: "Campaign",
+    year: "2025",
+    line: "Six cut-downs from one shoot, built so a four-week campaign never repeats the same opening frame twice.",
+    runtime: "6 × 0:15",
   },
   {
-    name: "Bandra Book Club",
-    category: "CMS platform",
-    kind: "cms",
-    description:
-      "A reading club wanted to publish weekly without calling anyone. We set up a CMS with reviews, events and a newsletter, and trained the team in one afternoon.",
-    video: null,
-    poster: null,
+    name: "Kalbadevi Supply",
+    kind: "Web app",
+    year: "2025",
+    line: "A wholesale floor on MongoDB and Node: stock, orders and dues, readable on a phone in a crowded lane.",
+    runtime: "—",
   },
 ];
+
+// PLACEHOLDERS: replace with the two co-founders' real names and roles.
+export const founders = [
+  {
+    name: "Founder name",
+    role: "Direction and camera",
+    bio: "Leads the shoot: treatment, lighting, camera, and the grade that holds it all together.",
+  },
+  {
+    name: "Founder name",
+    role: "Technology and design",
+    bio: "Leads the build: websites, web apps, CRMs and the systems running behind them.",
+  },
+];
+
+// The one Bombay moment on the site.
+export const bombay = {
+  src: "/archive/premier-padmini-driver-doing-maintenance-on-his.jpg",
+  alt: "Two mechanics crouched at the wheel arch of a black-and-yellow Premier Padmini taxi in a Mumbai lane.",
+  credit: "Photograph by Everhard van Eimeren, CC BY-SA 4.0, via Wikimedia Commons.",
+};
+
+// The brief builder's options.
+export const timelines = ["Yesterday", "This quarter", "Next quarter", "Still thinking"] as const;
+export const budgets = [
+  "Under ₹2 lakh",
+  "₹2–6 lakh",
+  "₹6–15 lakh",
+  "Over ₹15 lakh",
+  "Tell me what it costs",
+] as const;
