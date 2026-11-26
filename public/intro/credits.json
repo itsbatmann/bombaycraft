@@ -1,0 +1,444 @@
+[
+  {
+    "file": "public/intro/eye.mp4",
+    "source": "https://mixkit.co/ (video 367)",
+    "original": "https://assets.mixkit.co/videos/367/367-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/sleeve.mp4",
+    "source": "https://mixkit.co/ (video 241)",
+    "original": "https://assets.mixkit.co/videos/241/241-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/makeup.mp4",
+    "source": "https://mixkit.co/ (video 52055)",
+    "original": "https://assets.mixkit.co/videos/52055/52055-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/dj.mp4",
+    "source": "https://mixkit.co/ (video 830)",
+    "original": "https://assets.mixkit.co/videos/830/830-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/board.mp4",
+    "source": "https://mixkit.co/ (video 43925)",
+    "original": "https://assets.mixkit.co/videos/43925/43925-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/coffee.mp4",
+    "source": "https://mixkit.co/ (video 209)",
+    "original": "https://assets.mixkit.co/videos/209/209-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/grass.mp4",
+    "source": "https://mixkit.co/ (video 8864)",
+    "original": "https://assets.mixkit.co/videos/8864/8864-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 3.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/espresso.mp4",
+    "source": "https://mixkit.co/ (video 3572)",
+    "original": "https://assets.mixkit.co/videos/3572/3572-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/lips.mp4",
+    "source": "https://mixkit.co/ (video 43270)",
+    "original": "https://assets.mixkit.co/videos/43270/43270-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/muse.mp4",
+    "source": "https://mixkit.co/ (video 4708)",
+    "original": "https://assets.mixkit.co/videos/4708/4708-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 3.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/guitar.mp4",
+    "source": "https://mixkit.co/ (video 42824)",
+    "original": "https://assets.mixkit.co/videos/42824/42824-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 3.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/pier.mp4",
+    "source": "https://mixkit.co/ (video 1197)",
+    "original": "https://assets.mixkit.co/videos/1197/1197-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/road.mp4",
+    "source": "https://mixkit.co/ (video 41574)",
+    "original": "https://assets.mixkit.co/videos/41574/41574-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 3.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/mist.mp4",
+    "source": "https://mixkit.co/ (video 22728)",
+    "original": "https://assets.mixkit.co/videos/22728/22728-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 3.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/static.mp4",
+    "source": "https://mixkit.co/ (video 46291)",
+    "original": "https://assets.mixkit.co/videos/46291/46291-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/leader.mp4",
+    "source": "https://mixkit.co/ (video 4421)",
+    "original": "https://assets.mixkit.co/videos/4421/4421-720.mp4",
+    "trim": {
+      "start": 0.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/runway.mp4",
+    "source": "https://mixkit.co/ (video 7374)",
+    "original": "https://assets.mixkit.co/videos/7374/7374-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 3.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/model.mp4",
+    "source": "https://mixkit.co/ (video 805)",
+    "original": "https://assets.mixkit.co/videos/805/805-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/neon.mp4",
+    "source": "https://mixkit.co/ (video 44558)",
+    "original": "https://assets.mixkit.co/videos/44558/44558-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/shades.mp4",
+    "source": "https://mixkit.co/ (video 44559)",
+    "original": "https://assets.mixkit.co/videos/44559/44559-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/dusk.mp4",
+    "source": "https://mixkit.co/ (video 4629)",
+    "original": "https://assets.mixkit.co/videos/4629/4629-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 2.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/drive.mp4",
+    "source": "https://mixkit.co/ (video 52427)",
+    "original": "https://assets.mixkit.co/videos/52427/52427-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 6.0
+    },
+    "width": 960,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/wing.mp4",
+    "source": "https://mixkit.co/ (video 2684)",
+    "original": "https://assets.mixkit.co/videos/2684/2684-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/wingpink.mp4",
+    "source": "https://mixkit.co/ (video 4204)",
+    "original": "https://assets.mixkit.co/videos/4204/4204-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/wingblue.mp4",
+    "source": "https://mixkit.co/ (video 3099)",
+    "original": "https://assets.mixkit.co/videos/3099/3099-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/shadows.mp4",
+    "source": "https://mixkit.co/ (video 49691)",
+    "original": "https://assets.mixkit.co/videos/49691/49691-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/station.mp4",
+    "source": "https://mixkit.co/ (video 1606)",
+    "original": "https://assets.mixkit.co/videos/1606/1606-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/tokyo.mp4",
+    "source": "https://mixkit.co/ (video 4231)",
+    "original": "https://assets.mixkit.co/videos/4231/4231-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/reels.mp4",
+    "source": "https://mixkit.co/ (video 47234)",
+    "original": "https://assets.mixkit.co/videos/47234/47234-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/meters.mp4",
+    "source": "https://mixkit.co/ (video 31368)",
+    "original": "https://assets.mixkit.co/videos/31368/31368-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/keys.mp4",
+    "source": "https://mixkit.co/ (video 44147)",
+    "original": "https://assets.mixkit.co/videos/44147/44147-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/peaks.mp4",
+    "source": "https://mixkit.co/ (video 4366)",
+    "original": "https://assets.mixkit.co/videos/4366/4366-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/reel.mp4",
+    "source": "https://mixkit.co/ (video 28418)",
+    "original": "https://assets.mixkit.co/videos/28418/28418-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  },
+  {
+    "file": "public/intro/piano.mp4",
+    "source": "https://mixkit.co/ (video 33936)",
+    "original": "https://assets.mixkit.co/videos/33936/33936-720.mp4",
+    "trim": {
+      "start": 1.0,
+      "seconds": 4.0
+    },
+    "width": 480,
+    "license": "Mixkit Stock Video Free License",
+    "licenseUrl": "https://mixkit.co/license/#videoFree",
+    "creditRequired": false
+  }
+]

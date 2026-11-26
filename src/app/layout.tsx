@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, Outfit } from "next/font/google";
+import { Figtree, Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Motion } from "@/components/Motion";
-import { Preloader } from "@/components/Preloader";
+import { Intro } from "@/components/Intro";
 import "./globals.css";
 
 const figtree = Figtree({
@@ -21,7 +21,23 @@ const figtree = Figtree({
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "700"],
+  display: "swap",
+});
+
+/* The intro reel's two voices: a tight display serif and a typewriter mono. */
+const serif = Instrument_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -35,9 +51,9 @@ export const viewport: Viewport = { themeColor: "#f2f3fa" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${figtree.variable} ${outfit.variable} h-full antialiased`}>
+    <html lang="en" className={`${figtree.variable} ${outfit.variable} ${serif.variable} ${mono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        <Preloader />
+        <Intro />
         <a href="#main" className="skip">
           Skip to content
         </a>
