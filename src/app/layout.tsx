@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree } from "next/font/google";
+import { Figtree, Outfit } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Motion } from "@/components/Motion";
 import { Preloader } from "@/components/Preloader";
@@ -9,6 +9,19 @@ const figtree = Figtree({
   variable: "--font-figtree",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+/*
+  Display face. The brief asks for Biotif (Indian Type Foundry, licensed);
+  Outfit is the closest open face until the licensed files are added. To
+  switch: drop Biotif-Light/Regular/Medium .woff2 into src/fonts and
+  replace this with next/font/local pointing at them.
+*/
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
@@ -22,7 +35,7 @@ export const viewport: Viewport = { themeColor: "#f2f3fa" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${figtree.variable} h-full antialiased`}>
+    <html lang="en" className={`${figtree.variable} ${outfit.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <Preloader />
         <a href="#main" className="skip">

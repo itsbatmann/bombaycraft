@@ -31,6 +31,9 @@
   --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
   --t-press: 140ms;
   --t-hover: 180ms;
+
+  /* Biotif when the licensed files are installed; Outfit stands in. */
+  --font-display: Biotif, var(--font-outfit), var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme inline {
@@ -72,7 +75,8 @@ h2,
 h3 {
   margin: 0;
   text-wrap: balance;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 400;
   letter-spacing: -0.025em;
 }
 ol,
@@ -350,34 +354,112 @@ html.is-loading {
   }
 }
 
-/* ---------- statement ---------- */
-.statement {
-  padding: var(--gap) var(--margin) 0;
+/* ---------- manifesto ---------- */
+.manifesto {
+  position: relative;
+  margin-top: var(--gap);
+  padding: 0 var(--margin);
+  min-height: 72svh;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: var(--gutter);
-  row-gap: 1.5rem;
+  align-items: center;
+  overflow: clip;
 }
-.statement__text {
-  grid-column: 1 / 9;
-  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  max-width: 34ch;
+.manifesto__stage {
+  position: relative;
+  grid-column: 1 / 13;
 }
-.statement__aside {
-  grid-column: 9 / 13;
-  align-self: end;
-  color: var(--muted);
+.manifesto__disc {
+  position: absolute;
+  top: 50%;
+  border-radius: 50%;
+  background: var(--surface);
+  pointer-events: none;
+}
+.manifesto__disc--a {
+  width: 22vw;
+  height: 22vw;
+  left: 27vw;
+  transform: translateY(-50%);
+}
+.manifesto__disc--b {
+  width: 21vw;
+  height: 21vw;
+  left: 57vw;
+  transform: translateY(-50%);
+}
+.manifesto__title {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(3rem, 9vw, 10rem);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  z-index: 1;
+}
+.manifesto__l1 {
+  padding-left: 17vw;
+}
+.manifesto__l2 {
+  padding-left: 38vw;
+}
+.manifesto__left,
+.manifesto__right {
+  position: absolute;
+  z-index: 1;
+  max-width: 32ch;
+  font-size: var(--step-small);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.manifesto__left {
+  left: var(--margin);
+  bottom: 24%;
   max-width: 30ch;
 }
+.manifesto__right {
+  right: var(--margin);
+  top: 26%;
+}
 @media (max-width: 900px) {
-  .statement {
+  .manifesto {
     display: block;
+    min-height: 0;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
   }
-  .statement__aside {
-    margin-top: 1.25rem;
+  .manifesto__title {
+    font-size: 13.5vw;
+  }
+  .manifesto__l1 {
+    padding-left: 0;
+  }
+  .manifesto__l2 {
+    padding-left: 16vw;
+  }
+  .manifesto__stage {
+    padding: 10vw 0;
+  }
+  .manifesto__disc--a {
+    width: 46vw;
+    height: 46vw;
+    left: 10vw;
+    top: 50%;
+    transform: translateY(-60%);
+  }
+  .manifesto__disc--b {
+    width: 40vw;
+    height: 40vw;
+    left: 50vw;
+    top: 50%;
+    transform: translateY(-30%);
+  }
+  .manifesto__left,
+  .manifesto__right {
+    position: static;
+    max-width: 38ch;
+    margin-top: 1.5rem;
   }
 }
 
@@ -864,6 +946,43 @@ html.is-loading {
   .js [data-reveal].is-in {
     opacity: 1;
     transform: none;
+  }
+  /* The manifesto's lines rise out of their masks (observed on the mask); the discs keep their centring and grow in. */
+  .js .manifesto .line[data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .js .manifesto .line[data-reveal] > span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1000ms var(--ease-expo) var(--d, 0ms);
+  }
+  .js .manifesto .line[data-reveal].is-in > span {
+    transform: none;
+  }
+  .js .manifesto__disc[data-reveal] {
+    transform: translateY(-50%) scale(0.7);
+    transition:
+      opacity 900ms var(--ease-out) var(--d, 0ms),
+      transform 1200ms var(--ease-expo) var(--d, 0ms);
+  }
+  .js .manifesto__disc[data-reveal].is-in {
+    transform: translateY(-50%) scale(1);
+  }
+  @media (max-width: 900px) {
+    .js .manifesto__disc--a[data-reveal] {
+      transform: translateY(-60%) scale(0.7);
+    }
+    .js .manifesto__disc--a[data-reveal].is-in {
+      transform: translateY(-60%);
+    }
+    .js .manifesto__disc--b[data-reveal] {
+      transform: translateY(-30%) scale(0.7);
+    }
+    .js .manifesto__disc--b[data-reveal].is-in {
+      transform: translateY(-30%);
+    }
   }
 }
 @keyframes line-up {
