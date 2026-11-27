@@ -33,14 +33,14 @@
   --t-hover: 180ms;
 
   /* Biotif when the licensed files are installed; Outfit stands in. */
-  --font-display: Biotif, var(--font-outfit), var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-nautigal), "Brush Script MT", cursive;
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-ink: var(--ink);
   --color-accent: var(--accent);
-  --font-sans: var(--font-figtree);
+  --font-sans: var(--font-urbanist);
 }
 
 html {
@@ -50,7 +50,7 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-urbanist), ui-sans-serif, system-ui, sans-serif;
   font-size: var(--step-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -445,7 +445,7 @@ ul {
   inset: 4cqw 5cqw auto;
   display: flex;
   justify-content: space-between;
-  font: 500 2.6cqw/1 var(--font-figtree), sans-serif;
+  font: 500 2.6cqw/1 var(--font-urbanist), sans-serif;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: rgba(255, 248, 225, 0.8);
@@ -597,7 +597,7 @@ ul {
   left: 50%;
   top: 62%;
   translate: -50% 0;
-  font: 700 clamp(0.6rem, 0.75vw, 0.85rem) / 1 var(--font-figtree), sans-serif;
+  font: 700 clamp(0.6rem, 0.75vw, 0.85rem) / 1 var(--font-urbanist), sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #fff;
@@ -773,42 +773,70 @@ html.is-loading {
   }
 }
 
-/* ---------- hero ---------- */
+/* ---------- hero: the postcard ---------- */
 .hero {
-  padding: 8.5rem var(--margin) 0;
-}
-.hero__copy {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: var(--gutter);
-  align-items: end;
-  margin-bottom: 2.5rem;
-}
-.hero__title {
-  grid-column: 1 / 9;
-  font-size: var(--step-display);
-  line-height: 1.05;
-}
-.hero__lead {
-  grid-column: 9 / 13;
-  max-width: 34ch;
-  color: var(--muted);
-}
-.hero__panel {
   position: relative;
-  height: min(74svh, 820px);
-  min-height: 420px;
-  border-radius: var(--radius);
+  height: 100svh;
+  min-height: 560px;
   overflow: clip;
-  background: var(--panel);
+  background: #10121c;
+  color: #fff;
 }
-.hero__panel canvas {
+.hero__bg,
+.hero__bg video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
 }
-.hero__still {
+.hero__bg video {
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+}
+.hero__bg video.is-on {
+  opacity: 1;
+}
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: #0b0d16;
+  opacity: 0.22;
+  pointer-events: none;
+}
+/* The stamp: a white card with perforated edges, the clip inset like a printed picture. */
+.hero__centre {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.hero__stamp {
+  position: relative;
+  height: min(70svh, 760px);
+  aspect-ratio: 4 / 5;
+  background: #f7f6f2;
+  padding: 1.1rem;
+  pointer-events: auto;
+  --hole: 8px;
+  --pitch: 22px;
+  mask:
+    radial-gradient(circle var(--hole) at 50% 0, transparent 98%, #000 100%) 0 0 / var(--pitch) var(--pitch) repeat-x,
+    radial-gradient(circle var(--hole) at 50% 100%, transparent 98%, #000 100%) 0 100% / var(--pitch) var(--pitch) repeat-x,
+    radial-gradient(circle var(--hole) at 0 50%, transparent 98%, #000 100%) 0 0 / var(--pitch) var(--pitch) repeat-y,
+    radial-gradient(circle var(--hole) at 100% 50%, transparent 98%, #000 100%) 100% 0 / var(--pitch) var(--pitch) repeat-y,
+    linear-gradient(#000, #000) var(--pitch) var(--pitch) / calc(100% - var(--pitch) * 2) calc(100% - var(--pitch) * 2) no-repeat;
+}
+.hero__panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: clip;
+  background: #1a1d2e;
+  border-radius: 2px;
+}
+.hero__panel video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -816,21 +844,46 @@ html.is-loading {
   object-fit: cover;
   opacity: 0;
 }
-.hero__panel.is-static .hero__still {
+.hero__panel video.is-on {
   opacity: 1;
 }
-.hero__panel.is-static canvas {
-  display: none;
-}
-.hero__note {
+/* The name, split either side of the stamp, like a postcard's title. */
+.hero__title {
   position: absolute;
-  left: 1.5rem;
-  bottom: 1.25rem;
-  font-size: var(--step-small);
-  color: var(--muted);
+  inset: 0;
+  margin: 0;
+  pointer-events: none;
 }
-.hero__panel.is-static .hero__note {
-  display: none;
+.hero__word {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 7.5vw, 8.5rem);
+  line-height: 0.9;
+  letter-spacing: 0;
+  color: #fff;
+  white-space: nowrap;
+}
+.hero__word--l {
+  right: calc(50% + min(70svh, 760px) * 0.4 + 3vw);
+  text-align: right;
+}
+.hero__word--r {
+  left: calc(50% + min(70svh, 760px) * 0.4 + 3vw);
+}
+.hero__handle {
+  display: block;
+  margin-top: 0.15em;
+  max-width: 22ch;
+  font-family: var(--font-urbanist), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: var(--step-body);
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+  white-space: normal;
+  opacity: 0.92;
 }
 .lines .line {
   display: block;
@@ -843,17 +896,30 @@ html.is-loading {
 }
 @media (max-width: 900px) {
   .hero {
-    padding-top: 6.5rem;
+    min-height: 100svh;
   }
-  .hero__copy {
-    display: block;
+  .hero__stamp {
+    height: auto;
+    width: 62vw;
+    padding: 0.8rem;
+    --hole: 6px;
+    --pitch: 15px;
   }
-  .hero__lead {
-    margin-top: 1.25rem;
+  .hero__word {
+    font-size: 16vw;
+    transform: none;
   }
-  .hero__panel {
-    height: 64svh;
-    min-height: 360px;
+  .hero__word--l {
+    right: auto;
+    left: 5vw;
+    top: 13%;
+    text-align: left;
+  }
+  .hero__word--r {
+    left: auto;
+    right: 5vw;
+    top: auto;
+    bottom: 6%;
   }
 }
 
@@ -1510,3 +1576,12 @@ html.lenis body {
 /* dive styles above */
 
 /* cards */
+
+/* The header turns white while the postcard hero is under it. */
+html[data-ink="light"] {
+  --head-ink: #ffffff;
+}
+html[data-ink="light"] .site-head .pill--dark {
+  background: #ffffff;
+  color: var(--ink);
+}

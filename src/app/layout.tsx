@@ -1,27 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Figtree, Instrument_Serif, JetBrains_Mono, Outfit } from "next/font/google";
+import { Instrument_Serif, JetBrains_Mono, The_Nautigal, Urbanist } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Motion } from "@/components/Motion";
 import { Intro } from "@/components/Intro";
 import "./globals.css";
 
-const figtree = Figtree({
-  variable: "--font-figtree",
+/* The two faces of the site: The Nautigal for display, Urbanist for everything read. Both open (Google Fonts). */
+const nautigal = The_Nautigal({
+  variable: "--font-nautigal",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
-/*
-  Display face. The brief asks for Biotif (Indian Type Foundry, licensed);
-  Outfit is the closest open face until the licensed files are added. To
-  switch: drop Biotif-Light/Regular/Medium .woff2 into src/fonts and
-  replace this with next/font/local pointing at them.
-*/
-const outfit = Outfit({
-  variable: "--font-outfit",
+const urbanist = Urbanist({
+  variable: "--font-urbanist",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -51,7 +46,7 @@ export const viewport: Viewport = { themeColor: "#f2f3fa" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${figtree.variable} ${outfit.variable} ${serif.variable} ${mono.variable} h-full antialiased`}>
+    <html lang="en" className={`${nautigal.variable} ${urbanist.variable} ${serif.variable} ${mono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <Intro />
         <a href="#main" className="skip">

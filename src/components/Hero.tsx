@@ -1,83 +1,111 @@
 "use client";
 
 import { useEffect, useRef, type CSSProperties } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { createScene, type Scene3D } from "@/lib/three-scene";
-
-gsap.registerPlugin(ScrollTrigger);
 
 /*
-  The first screen: one sentence, then the studio's optics in a rounded
-  panel inset from the page edges. The camera leans with the pointer; the
-  cluster turns and the panel drifts a little as the page scrolls.
+  The postcard. Full-bleed footage behind, a perforated stamp in the
+  middle holding its own clip, the name split either side. Both layers
+  cut to a new shot every couple of seconds, the way the reference does.
+  The intro reel lands its last frame in .hero__panel, so that element
+  keeps its name.
 */
+const BACK = ["pier", "road", "grass", "runway", "dusk", "peaks"];
+const STAMP = ["drive", "muse", "neon", "station", "tokyo", "shades"];
+const CUT_MS = 1700;
+
+function Layer({ clips, className }: { clips: string[]; className: string }) {
+  return (
+    <div className={className}>
+      {clips.map((c, i) => (
+        <video key={c} src={`/intro/${c}.mp4`} muted loop playsInline preload={i < 2 ? "auto" : "metadata"} aria-hidden="true" />
+      ))}
+    </div>
+  );
+}
+
 export function Hero() {
-  const panel = useRef<HTMLDivElement>(null);
-  const canvas = useRef<HTMLCanvasElement>(null);
+  const root = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const host = panel.current;
-    const cv = canvas.current;
-    if (!host || !cv) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      host.classList.add("is-static");
-      return;
-    }
-    let scene: Scene3D | null = null;
-    try {
-      scene = createScene(cv, { ground: 0xdfe2f3 });
-      host.classList.add("is-live");
-    } catch {
-      host.classList.add("is-static");
-      return;
-    }
-    const onMove = (e: PointerEvent) => {
-      const r = host.getBoundingClientRect();
-      scene?.setPointer(((e.clientX - r.left) / r.width) * 2 - 1, -(((e.clientY - r.top) / r.height) * 2 - 1));
+    const sec = root.current;
+    if (!sec) return;
+    const html = document.documentElement;
+    const layers = [sec.querySelector(".hero__bg"), sec.querySelector(".hero__panel")].filter(Boolean) as HTMLElement[];
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const show = (layer: HTMLElement, i: number) => {
+      const vids = Array.from(layer.querySelectorAll("video"));
+      vids.forEach((v, k) => {
+        const on = k === i;
+        v.classList.toggle("is-on", on);
+        if (on) {
+          if (v.preload !== "auto") v.preload = "auto";
+          if (!reduced) v.play().catch(() => {});
+        } else v.pause();
+      });
     };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    const st = ScrollTrigger.create({
-      trigger: host,
-      start: "top 80%",
-      end: "bottom top",
-      scrub: true,
-      onUpdate: (self) => scene?.setScroll(self.progress),
-    });
-    const io = new IntersectionObserver(([e]) => scene?.setVisible(e.isIntersecting), { rootMargin: "10% 0px" });
-    io.observe(host);
+    const idx = [0, 1];
+    layers.forEach((l, k) => show(l, idx[k]));
+
+    let timer = 0;
+    if (!reduced) {
+      timer = window.setInterval(() => {
+        layers.forEach((l, k) => {
+          const n = l.querySelectorAll("video").length;
+          idx[k] = (idx[k] + 1) % n;
+          show(l, idx[k]);
+        });
+      }, CUT_MS);
+    }
+
+    // Pause the footage and restore the header's ink once the postcard has scrolled away.
+    const io = new IntersectionObserver(
+      ([e]) => {
+        html.dataset.ink = e.isIntersecting ? "light" : "dark";
+        if (!e.isIntersecting) layers.forEach((l) => l.querySelectorAll("video").forEach((v) => v.pause()));
+        else if (!reduced) layers.forEach((l, k) => show(l, idx[k]));
+      },
+      { rootMargin: "-80px 0px 0px 0px", threshold: 0.05 },
+    );
+    io.observe(sec);
+
     return () => {
-      st.kill();
+      window.clearInterval(timer);
       io.disconnect();
-      window.removeEventListener("pointermove", onMove);
-      scene?.dispose();
+      delete html.dataset.ink;
     };
   }, []);
 
   return (
-    <section className="hero" aria-labelledby="hero-title">
-      <div className="hero__copy">
-        <h1 id="hero-title" className="hero__title lines">
-          <span className="line">
-            <span data-line style={{ "--i": 0 } as CSSProperties}>
-              Films, and the websites
-            </span>
-          </span>
-          <span className="line">
-            <span data-line style={{ "--i": 1 } as CSSProperties}>
-              they play in.
-            </span>
-          </span>
-        </h1>
-        <p className="hero__lead" data-load style={{ "--d": "520ms" } as CSSProperties}>
-          A studio that writes, shoots and finishes films, then builds the real-time sites and the systems behind them. One team, camera to code.
-        </p>
+    <section ref={root} className="hero" aria-labelledby="hero-title">
+      <Layer clips={BACK} className="hero__bg" />
+      <div className="hero__scrim" aria-hidden="true" />
+
+      <div className="hero__centre">
+        <div className="hero__stamp" data-load style={{ "--d": "200ms" } as CSSProperties}>
+          <Layer clips={STAMP} className="hero__panel" />
+        </div>
       </div>
 
-      <div ref={panel} className="hero__panel" data-load style={{ "--d": "300ms" } as CSSProperties}>
-        <canvas ref={canvas} aria-hidden="true" />
-        <img className="hero__still" src="/photos/p338.jpg" alt="A figure in a hooded coat facing a misty sea" width={1200} height={1500} fetchPriority="high" />
-      </div>
+      <h1 id="hero-title" className="hero__title">
+        <span className="hero__word hero__word--l lines">
+          <span className="line">
+            <span data-line style={{ "--i": 0 } as CSSProperties}>
+              Kala &amp;
+            </span>
+          </span>
+        </span>
+        <span className="hero__word hero__word--r lines">
+          <span className="line">
+            <span data-line style={{ "--i": 1 } as CSSProperties}>
+              Codes
+            </span>
+          </span>
+          <span className="hero__handle" data-load style={{ "--d": "600ms" } as CSSProperties}>
+            films, and the websites they play in
+          </span>
+        </span>
+      </h1>
     </section>
   );
 }
