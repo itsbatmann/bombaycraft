@@ -12,6 +12,21 @@ export const DIVER_MODEL_URL = "/scuba_diver/scene.gltf";
   procedural; no model files are loaded.
 */
 
+/* A tiny clock on performance.now(); THREE.Clock is deprecated. */
+function makeClock() {
+  const start = performance.now();
+  let last = start;
+  return {
+    elapsed: () => (performance.now() - start) / 1000,
+    delta: () => {
+      const now = performance.now();
+      const d = (now - last) / 1000;
+      last = now;
+      return d;
+    },
+  };
+}
+
 export type Scene3D = {
   setPointer: (x: number, y: number) => void;
   setScroll: (p: number) => void;
@@ -122,12 +137,12 @@ export function createScene(canvas: HTMLCanvasElement, opts: { ground: number; l
   ro.observe(canvas);
   resize();
 
-  const clock = new THREE.Clock();
+  const clock = makeClock();
   const loop = () => {
     if (!alive) return;
     raf = requestAnimationFrame(loop);
     if (!visible || document.hidden) return;
-    const t = clock.getElapsedTime();
+    const t = clock.elapsed();
     pointer.lerp(target, 0.06);
     scrollEased += (scroll - scrollEased) * 0.08;
 
@@ -228,12 +243,12 @@ export function createOrbit(canvas: HTMLCanvasElement, ground: number): Scene3D 
   ro.observe(canvas);
   resize();
 
-  const clock = new THREE.Clock();
+  const clock = makeClock();
   const loop = () => {
     if (!alive) return;
     raf = requestAnimationFrame(loop);
     if (!visible || document.hidden) return;
-    const t = clock.getElapsedTime();
+    const t = clock.elapsed();
     eased += (scroll - eased) * 0.08;
     pointer.lerp(target, 0.06);
     group.rotation.y = eased * Math.PI * 1.2 + pointer.x * 0.3 + t * 0.05;
@@ -522,13 +537,13 @@ export function createDive(canvas: HTMLCanvasElement): Scene3D {
   ro.observe(canvas);
   resize();
 
-  const clock = new THREE.Clock();
+  const clock = makeClock();
   const loop = () => {
     if (!alive) return;
     raf = requestAnimationFrame(loop);
     if (!visible || document.hidden) return;
-    const dt = Math.min(clock.getDelta() || 0.016, 0.05);
-    const t = clock.elapsedTime;
+    const dt = Math.min(clock.delta() || 0.016, 0.05);
+    const t = clock.elapsed();
     eased += (scroll - eased) * 0.07;
     pointer.lerp(target, 0.05);
 
