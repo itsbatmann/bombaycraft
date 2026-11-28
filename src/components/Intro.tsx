@@ -157,7 +157,15 @@ export function Intro() {
     const done = () => {
       html.classList.remove("is-loading");
       html.classList.add("is-loaded");
-      el.remove();
+      // Hide rather than detach: React owns this node, and removing it
+
+      // breaks the next reconciliation (insertBefore/removeChild errors).
+
+      el.querySelectorAll("video").forEach((v) => v.pause());
+
+      el.style.display = "none";
+
+      el.setAttribute("aria-hidden", "true");
     };
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       done();
