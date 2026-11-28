@@ -158,13 +158,9 @@ export function Intro() {
       html.classList.remove("is-loading");
       html.classList.add("is-loaded");
       // Hide rather than detach: React owns this node, and removing it
-
       // breaks the next reconciliation (insertBefore/removeChild errors).
-
       el.querySelectorAll("video").forEach((v) => v.pause());
-
       el.style.display = "none";
-
       el.setAttribute("aria-hidden", "true");
     };
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
