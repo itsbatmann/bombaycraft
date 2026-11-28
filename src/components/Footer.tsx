@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="foot">
       <div className="foot__row">
-        <span className="wordmark">Kala &amp; Codes</span>
+        <span className="wordmark">626</span>
         <nav aria-label="Footer" className="foot__links">
           <a className="link" href="#work">
             Work
@@ -23,7 +23,7 @@ export function Footer() {
             LinkedIn
           </a>
         </nav>
-        <span className="foot__legal">© Kala &amp; Codes</span>
+        <span className="foot__legal">© 626</span>
       </div>
       <p className="credits">
         Pictures and footage: <a className="link" href="https://commons.wikimedia.org/w/index.php?curid=25511080">“Blackmagic Cinema Camera with lens”</a> by MMuzammils, CC BY-SA 3.0;{" "}

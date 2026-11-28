@@ -3,7 +3,7 @@ export function Header() {
   return (
     <header className="site-head">
       <a href="#hero-title" className="wordmark">
-        Kala &amp; Codes
+        626
       </a>
       <nav aria-label="Main" className="site-head__nav">
         <a className="link" href="#work">

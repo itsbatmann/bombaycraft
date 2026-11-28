@@ -365,7 +365,7 @@ export function Intro() {
 
     /* D · 2.60–4.40  nine screens, each on its own clock */
     typeInto(cellType, "wake up", 2.68, 0.3);
-    at(2.8, () => (cellSub.textContent = "a reel by kala & codes"));
+    at(2.8, () => (cellSub.textContent = "a reel by 626"));
     typeInto(cellMono, "slt b", 2.78, 0.2);
     at(2.9, () => cellOn(1, 1));
     at(2.95, () => cellGrade(5, "invert"));
@@ -706,7 +706,7 @@ export function Intro() {
               <div className="ix-poster">
                 <span className="ix-poster__kicker">daily cut · no. 04</span>
                 <span className="ix-poster__word">
-                  CODES<i>&amp;</i>
+                  626<i>&amp;</i>
                 </span>
                 <span className="ix-poster__small">
                   frame, grade, build, ship. camera to code, one team.

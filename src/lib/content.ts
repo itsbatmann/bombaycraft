@@ -2,13 +2,13 @@
 // studio's real work; the credits are real and stay with their pictures.
 
 export const site = {
-  name: "Kala & Codes",
+  name: "626",
   // PLACEHOLDER: confirm the studio's real address before launch.
-  email: "hello@kalaandcodes.com",
+  email: "hello@626.studio",
   // PLACEHOLDER: replace with the studio's real number before launch.
   phone: "+91 00000 00000",
-  instagram: "https://instagram.com/kalaandcodes",
-  linkedin: "https://linkedin.com/company/kalaandcodes",
+  instagram: "https://instagram.com/626.studio",
+  linkedin: "https://linkedin.com/company/626-studio",
 } as const;
 
 export type Project = {

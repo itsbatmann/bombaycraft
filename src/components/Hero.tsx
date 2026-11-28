@@ -90,16 +90,12 @@ export function Hero() {
       <h1 id="hero-title" className="hero__title">
         <span className="hero__word hero__word--l lines">
           <span className="line">
-            <span data-line style={{ "--i": 0 } as CSSProperties}>
-              Kala &amp;
-            </span>
+            <span data-line style={{ "--i": 0 } as CSSProperties}>626</span>
           </span>
         </span>
         <span className="hero__word hero__word--r lines">
           <span className="line">
-            <span data-line style={{ "--i": 1 } as CSSProperties}>
-              Codes
-            </span>
+            <span data-line style={{ "--i": 1 } as CSSProperties}>studio</span>
           </span>
           <span className="hero__handle" data-load style={{ "--d": "600ms" } as CSSProperties}>
             films, and the websites they play in

@@ -37,9 +37,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kala & Codes | Films, and the websites they play in",
+  title: "626 | Films, and the websites they play in",
   description:
-    "Kala & Codes is a studio that writes, shoots and finishes films, then builds the real-time websites, web apps and CRMs they play in. One team, camera to code.",
+    "626 is a studio that writes, shoots and finishes films, then builds the real-time websites, web apps and CRMs they play in. One team, camera to code.",
 };
 
 export const viewport: Viewport = { themeColor: "#f2f3fa" };

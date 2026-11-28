@@ -8,7 +8,7 @@ export function Contact() {
         <h2 id="contact-title">Tell us what you are making.</h2>
         <p>A film, a shoot, a website or the system behind it. Say which, and when it has to be live.</p>
         <div className="contact__row">
-          <a className="pill pill--dark" href={`mailto:${site.email}?subject=${encodeURIComponent("A project for Kala & Codes")}`}>
+          <a className="pill pill--dark" href={`mailto:${site.email}?subject=${encodeURIComponent("A project for 626")}`}>
             Start a project
           </a>
           <a className="link contact__mail" href={`mailto:${site.email}`}>
